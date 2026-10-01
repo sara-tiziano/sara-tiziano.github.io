@@ -194,25 +194,25 @@
       </div>
     </section>
 
-    <section id="film-centerpiece" class="pb-16 px-4 sm:px-6 relative">
-      <div class="max-w-6xl mx-auto">
+    <section id="film-centerpiece" class="pb-16 px-1.5 sm:px-4 md:px-6 lg:px-8 relative">
+      <div class="w-full max-w-[98vw] 2xl:max-w-[1800px] mx-auto">
         
         <!-- Framing container with archival matte border -->
-        <div class="p-3 sm:p-6 bg-white passepartout rounded-sm border border-stoneBorder">
+        <div class="p-1.5 sm:p-3 md:p-4 bg-white passepartout rounded-sm border border-stoneBorder">
           
           <!-- Header bar above video with Replace URL trigger -->
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-3 border-b border-stoneBorder/60 gap-3 text-xs">
-            <div class="flex items-center space-x-3">
-              <span class="px-2.5 py-1 bg-terracotta text-white font-mono text-[10px] uppercase tracking-wider rounded-sm font-semibold flex items-center space-x-1">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 mb-2.5 border-b border-stoneBorder/60 gap-2.5 text-xs px-1">
+            <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+              <span class="px-2.5 py-1 bg-terracotta text-white font-mono text-[10px] uppercase tracking-wider rounded-sm font-semibold flex items-center space-x-1 shrink-0">
                 <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
                 <span>Premieres Now</span>
               </span>
-              <span class="font-display uppercase tracking-widest text-charcoal font-semibold text-[11px]">
+              <span class="font-display uppercase tracking-wider text-charcoal font-semibold text-[11px] sm:text-xs">
                 Sara &amp; Tiziano &bull; Chapel of the Choir &amp; Casina Valadier &bull; 4K Master
               </span>
             </div>
 
-            <div class="flex items-center space-x-3 font-mono text-[11px]">
+            <div class="flex items-center space-x-3 font-mono text-[11px] shrink-0">
               <button 
                 onclick="openVideoConfigModal()" 
                 class="inline-flex items-center space-x-1.5 text-mutedInk hover:text-terracotta transition-colors py-1 px-2.5 rounded border border-stoneBorder/80 hover:border-terracotta bg-travertine/60"
@@ -230,19 +230,19 @@
             <div id="ytplayer" class="w-full h-full"></div>
 
             <!-- Floating Roman Unmute & Sound HUD -->
-            <div class="absolute bottom-4 left-4 right-4 sm:left-6 sm:right-6 pointer-events-none flex flex-wrap items-center justify-between gap-3 z-30">
+            <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-5 sm:right-5 pointer-events-none flex flex-wrap items-center justify-between gap-2.5 z-30">
               
               <!-- Left: Unmute Call-To-Action Button -->
               <div class="pointer-events-auto">
                 <button 
                   id="ytUnmuteBtn" 
                   onclick="toggleYTMute()"
-                  class="flex items-center space-x-3 px-5 py-2.5 rounded-full bg-white/95 hover:bg-white text-charcoal shadow-2xl backdrop-blur-md transition-all duration-300 font-mono text-xs uppercase tracking-wider font-semibold border border-romanGold"
+                  class="flex items-center space-x-2.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-black/45 hover:bg-black/65 text-white/90 hover:text-white shadow-lg backdrop-blur-md transition-all duration-300 font-mono text-[11px] sm:text-xs uppercase tracking-wider font-medium border border-white/25"
                 >
-                  <span id="ytMuteIconWrap" class="p-1 rounded-full bg-charcoal text-travertine">
+                  <span id="ytMuteIconWrap" class="p-1 rounded-full bg-white/15 text-white">
                     <i data-lucide="volume-x" class="w-3.5 h-3.5" id="ytMuteIcon"></i>
                   </span>
-                  <span id="ytMuteLabel" class="text-charcoal">Click to Unmute Audio</span>
+                  <span id="ytMuteLabel" class="text-white/90">Unmute Audio</span>
                   
                   <div id="ytEqualizer" class="hidden items-end space-x-0.5 h-3 pl-1">
                     <span class="w-0.5 bg-terracotta rounded-full wave-bar-1"></span>
@@ -1096,17 +1096,17 @@
       const eq = document.getElementById('ytEqualizer');
 
       if (muted) {
-        label.textContent = "Click to Unmute Audio";
+        label.textContent = "Unmute Audio";
         iconWrap.innerHTML = '<i data-lucide="volume-x" class="w-3.5 h-3.5"></i>';
-        btn.classList.remove('bg-terracotta', 'text-white');
-        btn.classList.add('bg-white/95', 'text-charcoal');
+        btn.className = "flex items-center space-x-2.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-black/45 hover:bg-black/65 text-white/90 hover:text-white shadow-lg backdrop-blur-md transition-all duration-300 font-mono text-[11px] sm:text-xs uppercase tracking-wider font-medium border border-white/25";
+        iconWrap.className = "p-1 rounded-full bg-white/15 text-white";
         eq.classList.add('hidden');
         eq.classList.remove('flex');
       } else {
-        label.textContent = "Sound Playing &bull; Mute";
+        label.textContent = "Sound Playing \u2022 Mute";
         iconWrap.innerHTML = '<i data-lucide="volume-2" class="w-3.5 h-3.5"></i>';
-        btn.classList.remove('bg-white/95', 'text-charcoal');
-        btn.classList.add('bg-terracotta', 'text-white');
+        btn.className = "flex items-center space-x-2.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-black/55 hover:bg-black/75 text-white shadow-lg backdrop-blur-md transition-all duration-300 font-mono text-[11px] sm:text-xs uppercase tracking-wider font-medium border border-white/30";
+        iconWrap.className = "p-1 rounded-full bg-terracotta/50 text-white";
         eq.classList.remove('hidden');
         eq.classList.add('flex');
       }
