@@ -88,6 +88,40 @@
     .wave-bar-2 { animation: wavePulse 1.2s ease-in-out 0.25s infinite; }
     .wave-bar-3 { animation: wavePulse 1.9s ease-in-out 0.5s infinite; }
     .wave-bar-4 { animation: wavePulse 1.4s ease-in-out 0.15s infinite; }
+
+    /* Renaissance polyphony notation & visualizer */
+    .note-active .note-head {
+      transform: rotate(45deg) scale(1.35) !important;
+      background-color: #C5A059 !important;
+      border-color: #FAF6F0 !important;
+      box-shadow: 0 0 12px rgba(197, 160, 89, 0.95), 0 0 20px rgba(182, 93, 67, 0.5) !important;
+    }
+    .note-active .note-lyric {
+      color: #B65D43 !important;
+      font-weight: 700 !important;
+      transform: scale(1.15) !important;
+    }
+    .staff-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: rgba(220, 210, 195, 0.7);
+    }
+    #scoreScrollWrapper::-webkit-scrollbar {
+      height: 6px;
+    }
+    #scoreScrollWrapper::-webkit-scrollbar-track {
+      background: #F4ECE1;
+      border-radius: 3px;
+    }
+    #scoreScrollWrapper::-webkit-scrollbar-thumb {
+      background: #D8CEBE;
+      border-radius: 3px;
+    }
+    #scoreScrollWrapper::-webkit-scrollbar-thumb:hover {
+      background: #C5A059;
+    }
   </style>
 </head>
 
@@ -114,6 +148,10 @@
           <span>The Wedding Film</span>
         </a>
         <a href="#heritage" class="hover:text-charcoal transition-colors">Sacred Heritage</a>
+        <a href="#polyphony" class="hover:text-charcoal transition-colors flex items-center space-x-1.5">
+          <i data-lucide="music" class="w-3 h-3 text-romanGold"></i>
+          <span>Palestrina Score</span>
+        </a>
         <a href="#pincio-light" class="hover:text-charcoal transition-colors">Pincio Sunset</a>
         <a href="#sensory" class="hover:text-charcoal transition-colors">Sensory Ephemera</a>
         <a href="#gallery-preview" class="hover:text-charcoal transition-colors">Photo Preview</a>
@@ -123,11 +161,11 @@
 
       <!-- Ambient Audio Controller -->
       <div class="flex items-center space-x-3">
-        <button id="audioToggleBtn" class="flex items-center space-x-2.5 px-3.5 py-1.5 rounded-full border border-stoneBorder hover:border-romanGold bg-white/80 text-charcoal transition-all text-xs" title="Sacred organ ambient acoustic drone">
+        <button id="audioToggleBtn" class="flex items-center space-x-2.5 px-3.5 py-1.5 rounded-full border border-stoneBorder hover:border-romanGold bg-white/80 text-charcoal transition-all text-xs" title="Palestrina: Sicut Cervus (Cappella del Coro Polyphony)">
           <span id="audioIconContainer">
             <i data-lucide="music" class="w-3.5 h-3.5 text-romanGold"></i>
           </span>
-          <span id="audioStatusText" class="text-[11px] uppercase tracking-wider text-mutedInk font-medium">Sacred Pad</span>
+          <span id="audioStatusText" class="text-[11px] uppercase tracking-wider text-mutedInk font-medium">Palestrina</span>
           
           <div id="waveEqualizer" class="flex items-end space-x-0.5 h-3.5 pl-1 opacity-35">
             <span class="w-0.5 bg-romanGold rounded-full wave-bar-1"></span>
@@ -149,6 +187,10 @@
       <div class="flex flex-col space-y-3.5 text-xs uppercase tracking-widest text-mutedInk font-medium">
         <a href="#film-centerpiece" class="mobile-nav-link text-terracotta font-semibold py-1">The Wedding Film (Live)</a>
         <a href="#heritage" class="mobile-nav-link hover:text-charcoal py-1">Sacred Art &amp; History</a>
+        <a href="#polyphony" class="mobile-nav-link hover:text-charcoal py-1 flex items-center space-x-2">
+          <i data-lucide="music" class="w-3.5 h-3.5 text-romanGold"></i>
+          <span>Palestrina: Sicut Cervus (Score)</span>
+        </a>
         <a href="#archive-status" class="mobile-nav-link hover:text-charcoal py-1">Archive Status &amp; Note</a>
         <a href="#pincio-light" class="mobile-nav-link hover:text-charcoal py-1">Pincio Sunset Simulator</a>
         <a href="#sensory" class="mobile-nav-link hover:text-charcoal py-1">Sensory Ephemera &amp; Menu</a>
@@ -425,6 +467,152 @@
           <div class="pt-5 mt-6 border-t border-stoneBorder text-[10px] font-mono uppercase tracking-widest text-mutedInk flex justify-between">
             <span>Neoclassical Belvedere</span>
             <span>Collis Pincius</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         PALESTRINA POLYPHONY & SACRED SCORE SECTION
+         ======================================================== -->
+    <section id="polyphony" class="py-24 px-4 sm:px-6 max-w-6xl mx-auto border-b border-stoneBorder/80">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="font-display text-[10px] uppercase tracking-[0.35em] text-romanGold font-semibold">Polyphonia Sacra &bull; Cappella Giulia</span>
+        <h2 class="font-serif text-4xl sm:text-5xl font-light text-charcoal mt-2 mb-3">Palestrina in the Chapel of the Choir</h2>
+        <div class="w-12 h-px bg-terracotta mx-auto mb-5"></div>
+        <p class="font-serif text-base sm:text-lg italic text-mutedInk leading-relaxed">
+          Giovanni Pierluigi da Palestrina (c. 1525&ndash;1594) composed in this very chapel as Master of the Vatican Choir. During our marriage service, his motet <em>Sicut Cervus</em> (Psalm 42) resonated through Maderno&rsquo;s choir stalls. Explore each voice below as the Renaissance score unfolds in real time.
+        </p>
+      </div>
+
+      <!-- Master Interactive Score Frame -->
+      <div class="bg-white p-4 sm:p-8 rounded-sm passepartout border border-stoneBorder shadow-sm">
+        
+        <!-- Score Header / Master Transport Controls -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between pb-6 mb-6 border-b border-stoneBorder/70 gap-4">
+          <div class="flex flex-wrap items-center gap-3">
+            <!-- Master Play/Pause Button -->
+            <button 
+              id="polyphonyPlayBtn" 
+              onclick="togglePalestrinaPlayback()"
+              class="flex items-center space-x-2.5 px-5 py-2.5 rounded-full bg-charcoal hover:bg-terracotta text-travertine transition-all duration-300 font-mono text-xs uppercase tracking-wider font-semibold shadow-md cursor-pointer"
+            >
+              <i data-lucide="play" class="w-4 h-4 text-romanGold" id="polyphonyPlayIcon"></i>
+              <span id="polyphonyPlayLabel">Play Sicut Cervus</span>
+            </button>
+
+            <!-- Reset / Restart Button -->
+            <button 
+              onclick="restartPalestrina()" 
+              class="p-2.5 rounded-full border border-stoneBorder hover:border-charcoal text-mutedInk hover:text-charcoal transition-colors bg-travertine/50 cursor-pointer"
+              title="Restart from Beginning (Measure 1)"
+            >
+              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+            </button>
+
+            <!-- Active Measure & Polyphonic Texture Badge -->
+            <div class="px-3.5 py-1.5 bg-parchment rounded border border-stoneBorder/80 text-[11px] font-mono text-charcoal flex items-center space-x-2">
+              <span class="w-2 h-2 rounded-full bg-romanGold animate-pulse"></span>
+              <span id="polyphonyTextureBadge" class="font-medium">Measure 1 &bull; Cantus Exposition</span>
+            </div>
+          </div>
+
+          <!-- Secondary Audio Controls: Cathedral Reverb & Tempo -->
+          <div class="flex flex-wrap items-center gap-4 text-xs font-mono text-mutedInk">
+            <!-- Cathedral Reverb Toggle -->
+            <button 
+              id="reverbToggleBtn" 
+              onclick="toggleCathedralReverb()"
+              class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded border border-romanGold/60 bg-parchment text-charcoal hover:bg-white transition-colors cursor-pointer"
+              title="Toggle St. Peter's Basilica vaulted stone reverberation"
+            >
+              <i data-lucide="volume-2" class="w-3.5 h-3.5 text-romanGold"></i>
+              <span id="reverbStatusLabel">Basilica Reverb: Active</span>
+            </button>
+
+            <!-- Time indicator -->
+            <div class="font-mono text-xs text-charcoal font-medium tabular-nums px-2.5 py-1 bg-travertine/60 rounded border border-stoneBorder">
+              <span id="polyphonyTimeCurrent">0:00</span> / <span id="polyphonyTimeTotal">0:59</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- The 4-Voice Partbook & Score Container -->
+        <div class="relative bg-[#FAF7F2] rounded border border-stoneBorder/90 p-2 sm:p-5 overflow-hidden">
+          
+          <!-- Instructions header -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between text-[11px] font-mono text-mutedInk pb-3 mb-3 border-b border-stoneBorder/60 gap-2">
+            <span class="flex items-center space-x-1.5">
+              <i data-lucide="info" class="w-3.5 h-3.5 text-romanGold shrink-0"></i>
+              <span>Click any voice row to <strong>Solo</strong> or <strong>Mute</strong> &bull; Click anywhere on the staves to seek</span>
+            </span>
+            <span class="text-terracotta uppercase tracking-wider font-semibold">Motet a 4 Voci &bull; Hypoionian Mode</span>
+          </div>
+
+          <!-- Rolling Scoreboard Container -->
+          <div id="scoreScrollWrapper" class="overflow-x-auto relative select-none pb-4">
+            
+            <div class="relative min-w-[2150px]">
+              
+              <!-- Timeline Ruler & Measures Header -->
+              <div id="scoreTimelineRuler" class="h-6 relative border-b border-stoneBorder/70 mb-2 font-mono text-[10px] text-mutedInk ml-44 sm:ml-52">
+                <!-- Measure markers inserted dynamically -->
+              </div>
+
+              <!-- Stave Rows Grid -->
+              <div id="scoreStavesContainer" class="relative space-y-3">
+                <!-- Playhead Line (sweeps across all 4 voices) -->
+                <div id="scorePlayhead" class="absolute top-0 bottom-0 w-0.5 bg-romanGold z-20 pointer-events-none transition-none shadow-[0_0_10px_rgba(197,160,89,0.9)]" style="left: 176px;">
+                  <div class="w-3 h-3 bg-romanGold rotate-45 -ml-1.5 -mt-1.5 shadow"></div>
+                </div>
+
+                <!-- 4 Voice lanes inserted dynamically -->
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Sacred Text & Liturgical Commentary Plaque -->
+        <div class="mt-8 pt-6 border-t border-stoneBorder/60 grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+          <div class="bg-parchment/60 p-5 rounded border border-stoneBorder flex flex-col justify-between">
+            <div>
+              <div class="flex items-center space-x-2 text-romanGold font-display text-[11px] uppercase tracking-widest font-semibold mb-2">
+                <i data-lucide="scroll" class="w-3.5 h-3.5"></i>
+                <span>Sacred Psalm Text &bull; Psalm 42:1&ndash;2</span>
+              </div>
+              <p class="font-serif italic text-base text-charcoal leading-relaxed mb-3">
+                &ldquo;Sicut cervus desiderat ad fontes aquarum, ita desiderat anima mea ad te, Deus.&rdquo;
+              </p>
+              <p class="font-sans text-mutedInk leading-relaxed">
+                &ldquo;As the deer longs for running streams, so longs my soul for you, O God.&rdquo;
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-stoneBorder/60 text-[10px] font-mono text-mutedInk flex justify-between">
+              <span>Latin Vulgate &bull; Roman Gradual</span>
+              <span>Offertorium Pro Sponsis</span>
+            </div>
+          </div>
+
+          <div class="bg-parchment/60 p-5 rounded border border-stoneBorder flex flex-col justify-between">
+            <div>
+              <div class="flex items-center space-x-2 text-terracotta font-display text-[11px] uppercase tracking-widest font-semibold mb-2">
+                <i data-lucide="landmark" class="w-3.5 h-3.5"></i>
+                <span>Architectural &amp; Choral Provenance</span>
+              </div>
+              <p class="font-sans text-xs text-charcoal/90 leading-relaxed mb-3">
+                Giovanni Pierluigi da Palestrina served as Master of the <strong>Cappella Giulia</strong> choir at St. Peter&rsquo;s Basilica. He composed and directed his vocal polyphony in the Chapel of the Choir where our marriage was consecrated.
+              </p>
+              <p class="font-sans text-xs text-mutedInk leading-relaxed">
+                Each voice enters in sacred imitation: first the <strong>Cantus</strong>, followed four measures later by the <strong>Altus</strong> a fifth lower, then the <strong>Tenor</strong>, and finally anchored by the deep <strong>Bassus</strong>.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-stoneBorder/60 text-[10px] font-mono text-mutedInk flex justify-between">
+              <span>Cappella del Coro Walnut Stalls</span>
+              <span>Twin 17th-Century Organs</span>
+            </div>
           </div>
         </div>
 
@@ -1173,86 +1361,753 @@
     }
 
     /* ========================================================
-       2. WEB AUDIO SYNTHESIZER: SACRED CHORAL RESONANCE
+       2. PALESTRINA POLYPHONY ENGINE & SCORE VISUALIZER
+          Piece: Sicut Cervus (Giovanni Pierluigi da Palestrina)
+          Setting: Cappella del Coro, St. Peter's Basilica
        ======================================================== */
     let audioCtx = null;
     let isAmbientPlaying = false;
-    let osc1, osc2, osc3, masterGain;
+    let isReverbEnabled = true;
+    let palestrinaSchedulerTimer = null;
+    let palestrinaRafId = null;
+    let palestrinaCurrentBeat = 0;
+    let palestrinaStartPerfTime = 0;
+    let palestrinaStartAudioTime = 0;
+    let palestrinaLastScheduledBeat = -0.1;
+    const BEAT_DURATION = 0.85; // Seconds per beat (~70 bpm, alla breve)
+    const TOTAL_BEATS = 70;
+    const BEAT_PIXEL_WIDTH = 26; // Pixels per beat on the horizontal stave
+
+    const NOTE_FREQUENCIES = {
+      'F2': 87.31, 'G2': 98.00, 'A2': 110.00, 'Bb2': 116.54, 'B2': 123.47,
+      'C3': 130.81, 'D3': 146.83, 'E3': 164.81, 'F3': 174.61, 'G3': 196.00,
+      'A3': 220.00, 'Bb3': 233.08, 'B3': 246.94, 'C4': 261.63, 'D4': 293.66,
+      'E4': 329.63, 'F4': 349.23, 'G4': 392.00, 'A4': 440.00, 'Bb4': 466.16,
+      'C5': 523.25
+    };
+
+    const PALESTRINA_VOICES = [
+      {
+        id: "cantus",
+        name: "Cantus",
+        range: "Soprano &bull; C1 Clef",
+        clef: "C1",
+        color: "#C5A059", // Roman Antique Gold
+        pan: -0.32,
+        minPitch: "D4",
+        maxPitch: "Bb4",
+        notes: [
+          { beat: 0, dur: 2, note: "F4", lyric: "Si-" },
+          { beat: 2, dur: 2, note: "A4", lyric: "-cut" },
+          { beat: 4, dur: 2, note: "Bb4", lyric: "cer-" },
+          { beat: 6, dur: 2, note: "A4", lyric: "-vus" },
+          { beat: 8, dur: 2, note: "G4", lyric: "de-" },
+          { beat: 10, dur: 2, note: "F4", lyric: "-si-" },
+          { beat: 12, dur: 2, note: "E4", lyric: "-de-" },
+          { beat: 14, dur: 2, note: "F4", lyric: "-rat" },
+          { beat: 16, dur: 4, note: "G4", lyric: "ad" },
+          { beat: 20, dur: 2, note: "A4", lyric: "fon-" },
+          { beat: 22, dur: 1, note: "G4", lyric: "tes" },
+          { beat: 23, dur: 1, note: "F4", lyric: "a-" },
+          { beat: 24, dur: 2, note: "E4", lyric: "-qua-" },
+          { beat: 26, dur: 2, note: "F4", lyric: "-rum," },
+          { beat: 28, dur: 2, note: "G4", lyric: "a-" },
+          { beat: 30, dur: 2, note: "F4", lyric: "-qua-" },
+          { beat: 32, dur: 2, note: "E4", lyric: "rum," },
+          { beat: 34, dur: 2, note: "D4", lyric: "" },
+          { beat: 36, dur: 4, note: "E4", lyric: "-rum:" },
+          { beat: 40, dur: 2, note: "F4", lyric: "i-" },
+          { beat: 42, dur: 2, note: "A4", lyric: "-ta" },
+          { beat: 44, dur: 2, note: "Bb4", lyric: "de-" },
+          { beat: 46, dur: 2, note: "A4", lyric: "-si-" },
+          { beat: 48, dur: 2, note: "G4", lyric: "-de-" },
+          { beat: 50, dur: 2, note: "F4", lyric: "-rat" },
+          { beat: 52, dur: 4, note: "G4", lyric: "a-" },
+          { beat: 56, dur: 4, note: "F4", lyric: "-ni-ma" },
+          { beat: 60, dur: 4, note: "E4", lyric: "me-" },
+          { beat: 64, dur: 6, note: "F4", lyric: "-a." }
+        ]
+      },
+      {
+        id: "altus",
+        name: "Altus",
+        range: "Alto &bull; C3 Clef",
+        clef: "C3",
+        color: "#B65D43", // Roman Terracotta
+        pan: -0.12,
+        minPitch: "A3",
+        maxPitch: "F4",
+        notes: [
+          { beat: 12, dur: 2, note: "C4", lyric: "Si-" },
+          { beat: 14, dur: 2, note: "E4", lyric: "-cut" },
+          { beat: 16, dur: 2, note: "F4", lyric: "cer-" },
+          { beat: 18, dur: 2, note: "E4", lyric: "-vus" },
+          { beat: 20, dur: 2, note: "D4", lyric: "de-" },
+          { beat: 22, dur: 2, note: "C4", lyric: "-si-" },
+          { beat: 24, dur: 2, note: "B3", lyric: "-de-" },
+          { beat: 26, dur: 2, note: "C4", lyric: "-rat" },
+          { beat: 28, dur: 4, note: "D4", lyric: "ad" },
+          { beat: 32, dur: 2, note: "E4", lyric: "fon-" },
+          { beat: 34, dur: 1, note: "D4", lyric: "tes" },
+          { beat: 35, dur: 1, note: "C4", lyric: "a-" },
+          { beat: 36, dur: 2, note: "B3", lyric: "-qua-" },
+          { beat: 38, dur: 2, note: "C4", lyric: "-rum," },
+          { beat: 40, dur: 2, note: "D4", lyric: "a-" },
+          { beat: 42, dur: 2, note: "C4", lyric: "-qua-" },
+          { beat: 44, dur: 2, note: "F4", lyric: "i-" },
+          { beat: 46, dur: 2, note: "E4", lyric: "-ta" },
+          { beat: 48, dur: 2, note: "D4", lyric: "de-" },
+          { beat: 50, dur: 2, note: "A3", lyric: "-si-" },
+          { beat: 52, dur: 2, note: "C4", lyric: "-de-" },
+          { beat: 54, dur: 2, note: "D4", lyric: "-rat" },
+          { beat: 56, dur: 4, note: "C4", lyric: "me-" },
+          { beat: 60, dur: 2, note: "C4", lyric: "-a" },
+          { beat: 62, dur: 2, note: "Bb3", lyric: "ad" },
+          { beat: 64, dur: 6, note: "A3", lyric: "te." }
+        ]
+      },
+      {
+        id: "tenor",
+        name: "Tenor",
+        range: "Tenor &bull; C4 Clef",
+        clef: "C4",
+        color: "#2C3E50", // Twilight Ink
+        pan: 0.12,
+        minPitch: "E3",
+        maxPitch: "C4",
+        notes: [
+          { beat: 24, dur: 2, note: "F3", lyric: "Si-" },
+          { beat: 26, dur: 2, note: "A3", lyric: "-cut" },
+          { beat: 28, dur: 2, note: "Bb3", lyric: "cer-" },
+          { beat: 30, dur: 2, note: "A3", lyric: "-vus" },
+          { beat: 32, dur: 2, note: "G3", lyric: "de-" },
+          { beat: 34, dur: 2, note: "F3", lyric: "-si-" },
+          { beat: 36, dur: 2, note: "E3", lyric: "-de-" },
+          { beat: 38, dur: 2, note: "F3", lyric: "-rat" },
+          { beat: 40, dur: 4, note: "G3", lyric: "ad" },
+          { beat: 44, dur: 2, note: "A3", lyric: "fon-" },
+          { beat: 46, dur: 1, note: "G3", lyric: "tes" },
+          { beat: 47, dur: 1, note: "F3", lyric: "a-" },
+          { beat: 48, dur: 2, note: "E3", lyric: "-qua-" },
+          { beat: 50, dur: 2, note: "F3", lyric: "-rum," },
+          { beat: 52, dur: 4, note: "E3", lyric: "de-" },
+          { beat: 56, dur: 4, note: "A3", lyric: "-si-" },
+          { beat: 60, dur: 4, note: "G3", lyric: "de-" },
+          { beat: 64, dur: 6, note: "F3", lyric: "-rat." }
+        ]
+      },
+      {
+        id: "bassus",
+        name: "Bassus",
+        range: "Bass &bull; F4 Clef",
+        clef: "F4",
+        color: "#191614", // Charcoal Walnut
+        pan: 0.32,
+        minPitch: "F2",
+        maxPitch: "C3",
+        notes: [
+          { beat: 36, dur: 2, note: "F2", lyric: "Si-" },
+          { beat: 38, dur: 2, note: "A2", lyric: "-cut" },
+          { beat: 40, dur: 2, note: "Bb2", lyric: "cer-" },
+          { beat: 42, dur: 2, note: "A2", lyric: "-vus" },
+          { beat: 44, dur: 2, note: "G2", lyric: "de-" },
+          { beat: 46, dur: 2, note: "F2", lyric: "-si-" },
+          { beat: 48, dur: 2, note: "C3", lyric: "-de-" },
+          { beat: 50, dur: 2, note: "F2", lyric: "-rat" },
+          { beat: 52, dur: 4, note: "C3", lyric: "ad" },
+          { beat: 56, dur: 2, note: "F2", lyric: "fon-" },
+          { beat: 58, dur: 2, note: "G2", lyric: "-tes" },
+          { beat: 60, dur: 4, note: "C3", lyric: "a-" },
+          { beat: 64, dur: 6, note: "F2", lyric: "-qua-rum." }
+        ]
+      }
+    ];
+
+    // Audio node routing references
+    let masterGainNode = null;
+    let dryGainNode = null;
+    let reverbGainNode = null;
+    let convolverNode = null;
+    const voiceAudioNodes = {};
+    const voiceMixerState = {
+      cantus: { muted: false, solo: false },
+      altus: { muted: false, solo: false },
+      tenor: { muted: false, solo: false },
+      bassus: { muted: false, solo: false }
+    };
 
     function initAudio() {
       if (!audioCtx) {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        audioCtx = new AudioContext();
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContextClass();
+        setupPalestrinaAudioGraph();
       }
     }
 
-    const audioToggleBtn = document.getElementById('audioToggleBtn');
-    const audioStatusText = document.getElementById('audioStatusText');
-    const waveEqualizer = document.getElementById('waveEqualizer');
-
-    audioToggleBtn.addEventListener('click', () => {
-      initAudio();
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-
-      if (!isAmbientPlaying) {
-        if (ytPlayer && isYTPlayerReady && !ytPlayer.isMuted()) {
-          ytPlayer.mute();
-          updateMuteButtonUI(true);
-        }
-        startSacredDrone();
-        isAmbientPlaying = true;
-        audioStatusText.textContent = "Sacred Pad (On)";
-        waveEqualizer.classList.remove('opacity-35');
-        waveEqualizer.classList.add('opacity-100');
-      } else {
-        stopSacredDrone();
-        isAmbientPlaying = false;
-        audioStatusText.textContent = "Sacred Pad";
-        waveEqualizer.classList.remove('opacity-100');
-        waveEqualizer.classList.add('opacity-35');
-      }
-    });
-
-    function startSacredDrone() {
+    function setupPalestrinaAudioGraph() {
       if (!audioCtx) return;
-      masterGain = audioCtx.createGain();
-      masterGain.gain.setValueAtTime(0.01, audioCtx.currentTime);
-      masterGain.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 2);
 
-      osc1 = audioCtx.createOscillator();
+      // Master output gain
+      masterGainNode = audioCtx.createGain();
+      masterGainNode.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      masterGainNode.gain.exponentialRampToValueAtTime(0.85, audioCtx.currentTime + 1.2);
+      masterGainNode.connect(audioCtx.destination);
+
+      // Dry / Reverb split
+      dryGainNode = audioCtx.createGain();
+      dryGainNode.gain.setValueAtTime(0.70, audioCtx.currentTime);
+      dryGainNode.connect(masterGainNode);
+
+      // Synthetic 2.8s Cathedral Convolver (St. Peter's vaulted stone acoustics)
+      convolverNode = audioCtx.createConvolver();
+      convolverNode.buffer = createCathedralImpulseBuffer(audioCtx, 2.8, 2.2);
+
+      reverbGainNode = audioCtx.createGain();
+      reverbGainNode.gain.setValueAtTime(isReverbEnabled ? 0.45 : 0.001, audioCtx.currentTime);
+      convolverNode.connect(reverbGainNode);
+      reverbGainNode.connect(masterGainNode);
+
+      // Create channels for each voice
+      PALESTRINA_VOICES.forEach(voice => {
+        const voiceGain = audioCtx.createGain();
+        voiceGain.gain.setValueAtTime(1.0, audioCtx.currentTime);
+
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(1400, audioCtx.currentTime);
+        filter.Q.setValueAtTime(0.8, audioCtx.currentTime);
+
+        let panner = null;
+        if (audioCtx.createStereoPanner) {
+          panner = audioCtx.createStereoPanner();
+          panner.pan.setValueAtTime(voice.pan, audioCtx.currentTime);
+          voiceGain.connect(filter);
+          filter.connect(panner);
+          panner.connect(dryGainNode);
+          panner.connect(convolverNode);
+        } else {
+          voiceGain.connect(filter);
+          filter.connect(dryGainNode);
+          filter.connect(convolverNode);
+        }
+
+        voiceAudioNodes[voice.id] = {
+          gain: voiceGain,
+          filter: filter,
+          panner: panner
+        };
+      });
+    }
+
+    function createCathedralImpulseBuffer(ctx, duration = 2.8, decay = 2.2) {
+      const rate = ctx.sampleRate;
+      const length = Math.floor(rate * duration);
+      const impulse = ctx.createBuffer(2, length, rate);
+      const left = impulse.getChannelData(0);
+      const right = impulse.getChannelData(1);
+
+      for (let i = 0; i < length; i++) {
+        const progress = i / length;
+        const envelope = Math.pow(1 - progress, decay);
+        left[i] = (Math.random() * 2 - 1) * envelope;
+        right[i] = (Math.random() * 2 - 1) * envelope;
+      }
+      return impulse;
+    }
+
+    /* Note Synthesizer: Smooth Renaissance Vocal & Flue Organ harmonics */
+    function playSyntheticChoralTone(freq, startTime, duration, voiceId) {
+      if (!audioCtx || !voiceAudioNodes[voiceId]) return;
+      const targetGainNode = voiceAudioNodes[voiceId].gain;
+
+      // Note envelope
+      const noteGain = audioCtx.createGain();
+      const safeStart = Math.max(audioCtx.currentTime, startTime);
+      const attackTime = 0.14;
+      const releaseTime = 0.22;
+      const sustainLevel = 0.075;
+
+      noteGain.gain.setValueAtTime(0.0001, safeStart);
+      noteGain.gain.linearRampToValueAtTime(sustainLevel, safeStart + attackTime);
+      noteGain.gain.setValueAtTime(sustainLevel, Math.max(safeStart + attackTime, safeStart + duration - releaseTime));
+      noteGain.gain.exponentialRampToValueAtTime(0.0001, safeStart + duration);
+
+      // Primary oscillator: Pure fundamental sine wave
+      const osc1 = audioCtx.createOscillator();
       osc1.type = 'sine';
-      osc1.frequency.setValueAtTime(73.4, audioCtx.currentTime); // D2
+      osc1.frequency.setValueAtTime(freq, safeStart);
 
-      osc2 = audioCtx.createOscillator();
+      // Secondary oscillator: Soft triangle harmonic for organ pipe warmth
+      const osc2 = audioCtx.createOscillator();
       osc2.type = 'triangle';
-      osc2.frequency.setValueAtTime(110.0, audioCtx.currentTime); // A2
+      osc2.frequency.setValueAtTime(freq, safeStart);
+      const osc2Gain = audioCtx.createGain();
+      osc2Gain.gain.setValueAtTime(0.22, safeStart);
 
-      osc3 = audioCtx.createOscillator();
-      osc3.type = 'sine';
-      osc3.frequency.setValueAtTime(185.0, audioCtx.currentTime); // F#3
+      osc1.connect(noteGain);
+      osc2.connect(osc2Gain);
+      osc2Gain.connect(noteGain);
+      noteGain.connect(targetGainNode);
 
-      osc1.connect(masterGain);
-      osc2.connect(masterGain);
-      osc3.connect(masterGain);
-      masterGain.connect(audioCtx.destination);
+      osc1.start(safeStart);
+      osc2.start(safeStart);
 
-      osc1.start();
-      osc2.start();
-      osc3.start();
+      const stopTime = safeStart + duration + 0.1;
+      osc1.stop(stopTime);
+      osc2.stop(stopTime);
+
+      setTimeout(() => {
+        try {
+          osc1.disconnect();
+          osc2.disconnect();
+          osc2Gain.disconnect();
+          noteGain.disconnect();
+        } catch(e) {}
+      }, (stopTime - audioCtx.currentTime + 0.5) * 1000);
+    }
+
+    /* Scheduler: Looks ahead and schedules upcoming notes with sample-accurate Web Audio timing */
+    function runPalestrinaScheduler() {
+      if (!audioCtx || !isAmbientPlaying || audioCtx.state !== 'running') return;
+
+      const currentAudioTime = audioCtx.currentTime;
+      // Synchronize audio clock with performance time
+      const expectedAudioStart = currentAudioTime - (palestrinaCurrentBeat * BEAT_DURATION);
+      if (Math.abs(palestrinaStartAudioTime - expectedAudioStart) > 0.3) {
+        palestrinaStartAudioTime = expectedAudioStart;
+      }
+
+      const scheduleAheadSec = 0.40;
+      const lookaheadBeats = scheduleAheadSec / BEAT_DURATION;
+      const startScanBeat = palestrinaLastScheduledBeat;
+      const endScanBeat = palestrinaCurrentBeat + lookaheadBeats;
+
+      PALESTRINA_VOICES.forEach(voice => {
+        // Skip voice if muted
+        if (voiceMixerState[voice.id].muted) return;
+
+        voice.notes.forEach(note => {
+          let noteBeat = note.beat;
+          // Handle loop boundary
+          if (noteBeat < startScanBeat && endScanBeat >= TOTAL_BEATS) {
+            noteBeat += TOTAL_BEATS;
+          }
+
+          if (noteBeat >= startScanBeat && noteBeat < endScanBeat) {
+            const beatDiff = noteBeat - palestrinaCurrentBeat;
+            const noteStartAudio = currentAudioTime + (beatDiff * BEAT_DURATION);
+            const freq = NOTE_FREQUENCIES[note.note] || 440;
+            const durSec = note.dur * BEAT_DURATION;
+            if (noteStartAudio >= currentAudioTime - 0.05) {
+              playSyntheticChoralTone(freq, noteStartAudio, durSec, voice.id);
+            }
+          }
+        });
+      });
+
+      palestrinaLastScheduledBeat = endScanBeat % TOTAL_BEATS;
+    }
+
+    /* Master Playback Controls */
+    function startPalestrina() {
+      initAudio();
+      palestrinaStartPerfTime = performance.now() - (palestrinaCurrentBeat * BEAT_DURATION * 1000);
+
+      if (audioCtx) {
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume().then(() => {
+            if (audioCtx) {
+              palestrinaStartAudioTime = audioCtx.currentTime - (palestrinaCurrentBeat * BEAT_DURATION);
+            }
+          }).catch(() => {});
+        } else {
+          palestrinaStartAudioTime = audioCtx.currentTime - (palestrinaCurrentBeat * BEAT_DURATION);
+        }
+      }
+
+      if (ytPlayer && isYTPlayerReady && !ytPlayer.isMuted()) {
+        ytPlayer.mute();
+        updateMuteButtonUI(true);
+      }
+
+      isAmbientPlaying = true;
+      palestrinaLastScheduledBeat = palestrinaCurrentBeat - 0.05;
+
+      clearInterval(palestrinaSchedulerTimer);
+      palestrinaSchedulerTimer = setInterval(runPalestrinaScheduler, 45);
+
+      updatePalestrinaUIState(true);
+      cancelAnimationFrame(palestrinaRafId);
+      palestrinaRafId = requestAnimationFrame(renderPalestrinaVisualLoop);
+    }
+
+    function stopPalestrina() {
+      isAmbientPlaying = false;
+      clearInterval(palestrinaSchedulerTimer);
+      cancelAnimationFrame(palestrinaRafId);
+      updatePalestrinaUIState(false);
+    }
+
+    function togglePalestrinaPlayback() {
+      if (isAmbientPlaying) {
+        stopPalestrina();
+      } else {
+        startPalestrina();
+      }
+    }
+
+    function restartPalestrina() {
+      palestrinaCurrentBeat = 0;
+      palestrinaLastScheduledBeat = -0.1;
+      palestrinaStartPerfTime = performance.now();
+      if (audioCtx) {
+        palestrinaStartAudioTime = audioCtx.currentTime;
+      }
+      if (!isAmbientPlaying) {
+        startPalestrina();
+      }
+    }
+
+    function seekPalestrina(beat) {
+      palestrinaCurrentBeat = Math.max(0, Math.min(TOTAL_BEATS - 0.1, beat));
+      palestrinaLastScheduledBeat = palestrinaCurrentBeat - 0.05;
+      palestrinaStartPerfTime = performance.now() - (palestrinaCurrentBeat * BEAT_DURATION * 1000);
+      if (audioCtx) {
+        palestrinaStartAudioTime = audioCtx.currentTime - (palestrinaCurrentBeat * BEAT_DURATION);
+      }
+      if (!isAmbientPlaying) {
+        startPalestrina();
+      }
+    }
+
+    function toggleCathedralReverb() {
+      isReverbEnabled = !isReverbEnabled;
+      const label = document.getElementById('reverbStatusLabel');
+      if (reverbGainNode && audioCtx) {
+        reverbGainNode.gain.setTargetAtTime(isReverbEnabled ? 0.45 : 0.0001, audioCtx.currentTime, 0.08);
+      }
+      if (label) {
+        label.textContent = isReverbEnabled ? "Basilica Reverb: Active" : "Direct Acoustics (Dry)";
+      }
+    }
+
+    /* Voice Mixer: Solo & Mute */
+    function toggleVoiceMute(voiceId) {
+      voiceMixerState[voiceId].muted = !voiceMixerState[voiceId].muted;
+      updateVoiceMixerDOM();
+    }
+
+    function toggleVoiceSolo(voiceId) {
+      const isCurrentlySolo = voiceMixerState[voiceId].solo;
+      if (isCurrentlySolo) {
+        // Clear all solos
+        Object.keys(voiceMixerState).forEach(k => {
+          voiceMixerState[k].solo = false;
+          voiceMixerState[k].muted = false;
+        });
+      } else {
+        // Solo this voice, mute all others
+        Object.keys(voiceMixerState).forEach(k => {
+          voiceMixerState[k].solo = (k === voiceId);
+          voiceMixerState[k].muted = (k !== voiceId);
+        });
+      }
+      updateVoiceMixerDOM();
+    }
+
+    function updateVoiceMixerDOM() {
+      PALESTRINA_VOICES.forEach(voice => {
+        const state = voiceMixerState[voice.id];
+        const muteBtn = document.getElementById(`mute-btn-${voice.id}`);
+        const soloBtn = document.getElementById(`solo-btn-${voice.id}`);
+        const voiceRow = document.getElementById(`voice-row-${voice.id}`);
+
+        if (muteBtn) {
+          if (state.muted) {
+            muteBtn.classList.add('bg-terracotta', 'text-white', 'border-terracotta');
+            muteBtn.classList.remove('bg-travertine/60', 'text-mutedInk');
+          } else {
+            muteBtn.classList.remove('bg-terracotta', 'text-white', 'border-terracotta');
+            muteBtn.classList.add('bg-travertine/60', 'text-mutedInk');
+          }
+        }
+
+        if (soloBtn) {
+          if (state.solo) {
+            soloBtn.classList.add('bg-romanGold', 'text-white', 'border-romanGold');
+            soloBtn.classList.remove('bg-travertine/60', 'text-mutedInk');
+          } else {
+            soloBtn.classList.remove('bg-romanGold', 'text-white', 'border-romanGold');
+            soloBtn.classList.add('bg-travertine/60', 'text-mutedInk');
+          }
+        }
+
+        if (voiceRow) {
+          voiceRow.style.opacity = state.muted ? "0.38" : "1.0";
+        }
+
+        // Apply gain change smoothly
+        if (voiceAudioNodes[voice.id] && audioCtx) {
+          voiceAudioNodes[voice.id].gain.gain.setTargetAtTime(state.muted ? 0.0001 : 1.0, audioCtx.currentTime, 0.05);
+        }
+      });
+    }
+
+    /* UI State Syncer (Top Navigation + Section Controls) */
+    function updatePalestrinaUIState(playing) {
+      const topBtnText = document.getElementById('audioStatusText');
+      const topEqualizer = document.getElementById('waveEqualizer');
+      const playIcon = document.getElementById('polyphonyPlayIcon');
+      const playLabel = document.getElementById('polyphonyPlayLabel');
+      const playBtn = document.getElementById('polyphonyPlayBtn');
+
+      if (playing) {
+        if (topBtnText) topBtnText.textContent = "Palestrina (Playing)";
+        if (topEqualizer) {
+          topEqualizer.classList.remove('opacity-35');
+          topEqualizer.classList.add('opacity-100');
+        }
+        if (playIcon) playIcon.setAttribute('data-lucide', 'pause');
+        if (playLabel) playLabel.textContent = "Pause Polyphony";
+        if (playBtn) {
+          playBtn.classList.remove('bg-charcoal');
+          playBtn.classList.add('bg-terracotta');
+        }
+      } else {
+        if (topBtnText) topBtnText.textContent = "Palestrina (Play)";
+        if (topEqualizer) {
+          topEqualizer.classList.remove('opacity-100');
+          topEqualizer.classList.add('opacity-35');
+        }
+        if (playIcon) playIcon.setAttribute('data-lucide', 'play');
+        if (playLabel) playLabel.textContent = "Play Sicut Cervus";
+        if (playBtn) {
+          playBtn.classList.remove('bg-terracotta');
+          playBtn.classList.add('bg-charcoal');
+        }
+      }
+      lucide.createIcons();
+    }
+
+    /* Backwards compatibility hooks for existing buttons */
+    function startSacredDrone() {
+      startPalestrina();
     }
 
     function stopSacredDrone() {
-      if (masterGain && audioCtx) {
-        masterGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1);
-        setTimeout(() => {
-          try {
-            if (osc1) osc1.stop();
-            if (osc2) osc2.stop();
-            if (osc3) osc3.stop();
-          } catch(e) {}
-        }, 1000);
-      }
+      stopPalestrina();
     }
+
+    const audioToggleBtn = document.getElementById('audioToggleBtn');
+    if (audioToggleBtn) {
+      audioToggleBtn.addEventListener('click', togglePalestrinaPlayback);
+    }
+
+    /* Score Visualizer DOM Generator */
+    function renderPalestrinaScore() {
+      const ruler = document.getElementById('scoreTimelineRuler');
+      const container = document.getElementById('scoreStavesContainer');
+      if (!ruler || !container) return;
+
+      // 1. Build Measure markers (18 measures, 4 beats each)
+      let rulerHTML = '';
+      const totalMeasures = Math.ceil(TOTAL_BEATS / 4);
+      for (let m = 0; m < totalMeasures; m++) {
+        const leftPx = m * 4 * BEAT_PIXEL_WIDTH;
+        rulerHTML += `
+          <div class="absolute top-0 bottom-0 border-l border-stoneBorder/80 pl-1.5 flex items-center" style="left: ${leftPx}px;">
+            <span class="text-charcoal/70 font-semibold tracking-wider">M.${m + 1}</span>
+          </div>
+        `;
+      }
+      ruler.innerHTML = rulerHTML;
+
+      // 2. Build 4 Voice Stave Rows
+      let stavesHTML = `
+        <div id="scorePlayhead" class="absolute top-0 bottom-0 w-0.5 bg-romanGold z-20 pointer-events-none transition-none shadow-[0_0_10px_rgba(197,160,89,0.9)]" style="left: 208px;">
+          <div class="w-3 h-3 bg-romanGold rotate-45 -ml-1.5 -mt-1.5 shadow"></div>
+        </div>
+      `;
+
+      PALESTRINA_VOICES.forEach(voice => {
+        // Vertical pitch range offset
+        const pitchOrder = [
+          'F2','G2','A2','Bb2','B2',
+          'C3','D3','E3','F3','G3','A3','Bb3','B3',
+          'C4','D4','E4','F4','G4','A4','Bb4','B4',
+          'C5','D5'
+        ];
+        const minIdx = pitchOrder.indexOf(voice.minPitch);
+        const maxIdx = pitchOrder.indexOf(voice.maxPitch);
+        const span = Math.max(1, maxIdx - minIdx);
+
+        stavesHTML += `
+          <div id="voice-row-${voice.id}" class="flex items-center group/stave transition-opacity duration-200">
+            
+            <!-- Sticky Voice Control Card -->
+            <div class="voice-header sticky left-0 z-10 w-44 sm:w-52 shrink-0 bg-white/95 backdrop-blur-md border border-stoneBorder/90 rounded-l p-2.5 sm:p-3 flex items-center justify-between shadow-xs">
+              <div>
+                <div class="flex items-center space-x-2">
+                  <span class="w-2.5 h-2.5 rounded-full shadow-xs" style="background-color: ${voice.color}"></span>
+                  <span class="font-display text-xs uppercase tracking-wider font-semibold text-charcoal">${voice.name}</span>
+                </div>
+                <div class="text-[10px] font-mono text-mutedInk mt-0.5">${voice.range}</div>
+              </div>
+
+              <div class="flex items-center space-x-1 font-mono text-[9px]">
+                <button 
+                  id="solo-btn-${voice.id}" 
+                  onclick="toggleVoiceSolo('${voice.id}')" 
+                  class="px-1.5 py-0.5 rounded border border-stoneBorder hover:border-charcoal bg-travertine/60 text-mutedInk hover:text-charcoal transition-colors cursor-pointer"
+                  title="Solo ${voice.name}"
+                >
+                  SOLO
+                </button>
+                <button 
+                  id="mute-btn-${voice.id}" 
+                  onclick="toggleVoiceMute('${voice.id}')" 
+                  class="px-1.5 py-0.5 rounded border border-stoneBorder hover:border-terracotta bg-travertine/60 text-mutedInk hover:text-terracotta transition-colors cursor-pointer"
+                  title="Mute ${voice.name}"
+                >
+                  MUTE
+                </button>
+              </div>
+            </div>
+
+            <!-- Stave Note Display Area -->
+            <div 
+              class="relative h-[78px] flex-1 bg-white/80 border-y border-r border-stoneBorder/70 rounded-r overflow-hidden cursor-pointer" 
+              onclick="handleStaveClick(event)"
+            >
+              <!-- 5 Staff Lines -->
+              <div class="staff-line" style="top: 15px;"></div>
+              <div class="staff-line" style="top: 27px;"></div>
+              <div class="staff-line" style="top: 39px;"></div>
+              <div class="staff-line" style="top: 51px;"></div>
+              <div class="staff-line" style="top: 63px;"></div>
+
+              <!-- Measure barlines -->
+              ${Array.from({ length: totalMeasures }).map((_, m) => `
+                <div class="absolute top-0 bottom-0 border-l border-stoneBorder/40 pointer-events-none" style="left: ${m * 4 * BEAT_PIXEL_WIDTH}px;"></div>
+              `).join('')}
+
+              <!-- Voice Notes -->
+              ${voice.notes.map((n, idx) => {
+                const notePitchIdx = pitchOrder.indexOf(n.note);
+                const norm = Math.max(0, Math.min(1, (notePitchIdx - minIdx) / span));
+                const bottomY = Math.round(10 + norm * 42);
+                const leftX = n.beat * BEAT_PIXEL_WIDTH;
+                const widthPx = Math.max(22, (n.dur * BEAT_PIXEL_WIDTH) - 4);
+
+                return `
+                  <div 
+                    id="note-${voice.id}-${idx}" 
+                    class="note-pill absolute flex flex-col items-center justify-center transition-all duration-150 rounded cursor-pointer group/note"
+                    data-voice="${voice.id}"
+                    data-beat="${n.beat}"
+                    data-dur="${n.dur}"
+                    style="left: ${leftX}px; width: ${widthPx}px; bottom: ${bottomY}px; height: 32px;"
+                    title="${voice.name}: ${n.note} (${n.dur} beats) &bull; ${n.lyric}"
+                    onclick="event.stopPropagation(); seekPalestrina(${n.beat})"
+                  >
+                    <!-- Diamond / Lozenge notehead -->
+                    <div class="note-head w-3 h-3 rotate-45 border border-stoneBorder bg-white transition-all duration-150 shadow-xs"></div>
+                    <!-- Syllable underneath -->
+                    <span class="note-lyric text-[10px] font-serif italic tracking-wide text-charcoal/80 transition-all duration-150 mt-1 select-none whitespace-nowrap">
+                      ${n.lyric || '&bull;'}
+                    </span>
+                  </div>
+                `;
+              }).join('')}
+
+            </div>
+
+          </div>
+        `;
+      });
+
+      container.innerHTML = stavesHTML;
+    }
+
+    function handleStaveClick(event) {
+      const rect = event.currentTarget.getBoundingClientRect();
+      const clickX = event.clientX - rect.left;
+      const clickedBeat = Math.floor(clickX / BEAT_PIXEL_WIDTH);
+      seekPalestrina(clickedBeat);
+    }
+
+    /* Animation Loop: Smooth Playhead, Active Note Highlights, & Auto-Scroll */
+    function renderPalestrinaVisualLoop() {
+      if (!isAmbientPlaying) return;
+
+      const elapsedSec = (performance.now() - palestrinaStartPerfTime) / 1000;
+      const curBeat = (elapsedSec / BEAT_DURATION) % TOTAL_BEATS;
+      palestrinaCurrentBeat = curBeat;
+
+      // 1. Move Playhead
+      const playhead = document.getElementById('scorePlayhead');
+      const headerOffset = window.innerWidth >= 640 ? 208 : 176;
+      if (playhead) {
+        playhead.style.left = `${headerOffset + (curBeat * BEAT_PIXEL_WIDTH)}px`;
+      }
+
+      // 2. Active Note Highlights & Syllables
+      PALESTRINA_VOICES.forEach(voice => {
+        voice.notes.forEach((note, idx) => {
+          const el = document.getElementById(`note-${voice.id}-${idx}`);
+          if (!el) return;
+          const isActive = (curBeat >= note.beat && curBeat < (note.beat + note.dur));
+          if (isActive) {
+            el.classList.add('note-active');
+          } else {
+            el.classList.remove('note-active');
+          }
+        });
+      });
+
+      // 3. Update Polyphonic Texture & Section Badge
+      const textureBadge = document.getElementById('polyphonyTextureBadge');
+      if (textureBadge) {
+        const curMeasure = Math.floor(curBeat / 4) + 1;
+        if (curBeat < 12) {
+          textureBadge.innerHTML = `M.${curMeasure} &bull; <strong>Cantus Solo</strong> (The Deer Thirsts)`;
+        } else if (curBeat < 24) {
+          textureBadge.innerHTML = `M.${curMeasure} &bull; <strong>Altus Enters</strong> (Imitation at the 5th)`;
+        } else if (curBeat < 36) {
+          textureBadge.innerHTML = `M.${curMeasure} &bull; <strong>Tenor Joins</strong> (3-Part Polyphony)`;
+        } else {
+          textureBadge.innerHTML = `M.${curMeasure} &bull; <strong>Bassus Enters</strong> (Full 4-Voice Choir)`;
+        }
+      }
+
+      // 4. Update Time Counter
+      const curTimeEl = document.getElementById('polyphonyTimeCurrent');
+      if (curTimeEl) {
+        const secTotal = Math.floor(curBeat * BEAT_DURATION);
+        const m = Math.floor(secTotal / 60);
+        const s = secTotal % 60;
+        curTimeEl.textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+      }
+
+      // 5. Auto-scroll wrapper to follow playhead smoothly
+      const wrapper = document.getElementById('scoreScrollWrapper');
+      if (wrapper) {
+        const headerW = window.innerWidth >= 640 ? 208 : 176;
+        const noteX = curBeat * BEAT_PIXEL_WIDTH;
+        const targetScroll = Math.max(0, noteX - (wrapper.clientWidth * 0.45) + headerW);
+        const currentScroll = wrapper.scrollLeft;
+        if (Math.abs(currentScroll - targetScroll) > 3) {
+          wrapper.scrollLeft = currentScroll + (targetScroll - currentScroll) * 0.15;
+        }
+      }
+
+      palestrinaRafId = requestAnimationFrame(renderPalestrinaVisualLoop);
+    }
+
+    // Initialize visual score on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      renderPalestrinaScore();
+    });
 
     /* ========================================================
        3. PINCIAN SUNSET SIMULATOR
