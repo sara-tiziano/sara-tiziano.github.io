@@ -108,19 +108,131 @@
       height: 1px;
       background-color: rgba(220, 210, 195, 0.7);
     }
-    #scoreScrollWrapper::-webkit-scrollbar {
+    #scoreScrollWrapper::-webkit-scrollbar,
+    #canonScrollWrapper::-webkit-scrollbar {
       height: 6px;
     }
-    #scoreScrollWrapper::-webkit-scrollbar-track {
+    #scoreScrollWrapper::-webkit-scrollbar-track,
+    #canonScrollWrapper::-webkit-scrollbar-track {
       background: #F4ECE1;
       border-radius: 3px;
     }
-    #scoreScrollWrapper::-webkit-scrollbar-thumb {
+    #scoreScrollWrapper::-webkit-scrollbar-thumb,
+    #canonScrollWrapper::-webkit-scrollbar-thumb {
       background: #D8CEBE;
       border-radius: 3px;
     }
-    #scoreScrollWrapper::-webkit-scrollbar-thumb:hover {
+    #scoreScrollWrapper::-webkit-scrollbar-thumb:hover,
+    #canonScrollWrapper::-webkit-scrollbar-thumb:hover {
       background: #C5A059;
+    }
+
+    /* Canon in D: Subtle 2-Measure Imitative Motif Sections */
+    .canon-motif-block {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      border-top-width: 2.5px;
+      border-top-style: solid;
+      border-left: 1px dashed rgba(220, 210, 195, 0.5);
+      box-sizing: border-box;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      z-index: 2;
+    }
+    .canon-motif-block.motif-hovered {
+      z-index: 5;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.04), 0 2px 10px rgba(0, 0, 0, 0.04);
+    }
+    .canon-motif-label {
+      opacity: 0.65;
+      font-size: 8.5px;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .canon-motif-block.motif-hovered .canon-motif-label,
+    .canon-motif-block:hover .canon-motif-label {
+      opacity: 1 !important;
+      transform: translateY(-1px);
+    }
+
+    /* 8 Rotating Roman Fresco Colorways for Canon Motifs */
+    /* 0: Antique Gold */
+    .canon-motif-block[data-motif-col="0"] { background-color: rgba(197, 160, 89, 0.08); border-top-color: rgba(197, 160, 89, 0.50); }
+    .canon-motif-block[data-motif-col="0"] .canon-motif-label { color: #8C6B28; background-color: rgba(197, 160, 89, 0.16); border: 1px solid rgba(197, 160, 89, 0.35); }
+    .canon-motif-block[data-motif-col="0"].motif-hovered { background-color: rgba(197, 160, 89, 0.22) !important; border-top-color: #C5A059 !important; }
+    .canon-motif-block[data-motif-col="0"].motif-hovered .canon-motif-label { background-color: #C5A059 !important; color: #FFFFFF !important; border-color: #8C6B28 !important; font-weight: 700 !important; box-shadow: 0 1px 4px rgba(140, 107, 40, 0.4); }
+    .note-pill[data-motif-col="0"] .note-head { border-color: rgba(197, 160, 89, 0.75); background-color: rgba(197, 160, 89, 0.18); }
+    .note-pill[data-motif-col="0"].motif-hovered .note-head { border-color: #8C6B28 !important; background-color: #C5A059 !important; box-shadow: 0 0 10px rgba(197, 160, 89, 0.85) !important; }
+
+    /* 1: Pompeian Terracotta */
+    .canon-motif-block[data-motif-col="1"] { background-color: rgba(182, 93, 67, 0.08); border-top-color: rgba(182, 93, 67, 0.50); }
+    .canon-motif-block[data-motif-col="1"] .canon-motif-label { color: #8D3C25; background-color: rgba(182, 93, 67, 0.16); border: 1px solid rgba(182, 93, 67, 0.35); }
+    .canon-motif-block[data-motif-col="1"].motif-hovered { background-color: rgba(182, 93, 67, 0.22) !important; border-top-color: #B65D43 !important; }
+    .canon-motif-block[data-motif-col="1"].motif-hovered .canon-motif-label { background-color: #B65D43 !important; color: #FFFFFF !important; border-color: #8D3C25 !important; font-weight: 700 !important; box-shadow: 0 1px 4px rgba(141, 60, 37, 0.4); }
+    .note-pill[data-motif-col="1"] .note-head { border-color: rgba(182, 93, 67, 0.75); background-color: rgba(182, 93, 67, 0.18); }
+    .note-pill[data-motif-col="1"].motif-hovered .note-head { border-color: #8D3C25 !important; background-color: #B65D43 !important; box-shadow: 0 0 10px rgba(182, 93, 67, 0.85) !important; }
+
+    /* 2: Roman Laurel */
+    .canon-motif-block[data-motif-col="2"] { background-color: rgba(78, 110, 88, 0.08); border-top-color: rgba(78, 110, 88, 0.50); }
+    .canon-motif-block[data-motif-col="2"] .canon-motif-label { color: #344E3D; background-color: rgba(78, 110, 88, 0.16); border: 1px solid rgba(78, 110, 88, 0.35); }
+    .canon-motif-block[data-motif-col="2"].motif-hovered { background-color: rgba(78, 110, 88, 0.22) !important; border-top-color: #4E6E58 !important; }
+    .canon-motif-block[data-motif-col="2"].motif-hovered .canon-motif-label { background-color: #4E6E58 !important; color: #FFFFFF !important; border-color: #344E3D !important; font-weight: 700 !important; box-shadow: 0 1px 4px rgba(52, 78, 61, 0.4); }
+    .note-pill[data-motif-col="2"] .note-head { border-color: rgba(78, 110, 88, 0.75); background-color: rgba(78, 110, 88, 0.18); }
+    .note-pill[data-motif-col="2"].motif-hovered .note-head { border-color: #344E3D !important; background-color: #4E6E58 !important; box-shadow: 0 0 10px rgba(78, 110, 88, 0.85) !important; }
+
+    /* 3: Tuscan Rose */
+    .canon-motif-block[data-motif-col="3"] { background-color: rgba(175, 106, 116, 0.08); border-top-color: rgba(175, 106, 116, 0.50); }
+    .canon-motif-block[data-motif-col="3"] .canon-motif-label { color: #7C3B45; background-color: rgba(175, 106, 116, 0.16); border: 1px solid rgba(175, 106, 116, 0.35); }
+    .canon-motif-block[data-motif-col="3"].motif-hovered { background-color: rgba(175, 106, 116, 0.22) !important; border-top-color: #AF6A74 !important; }
+    .canon-motif-block[data-motif-col="3"].motif-hovered .canon-motif-label { background-color: #AF6A74 !important; color: #FFFFFF !important; border-color: #7C3B45 !important; font-weight: 700 !important; box-shadow: 0 1px 4px rgba(124, 59, 69, 0.4); }
+    .note-pill[data-motif-col="3"] .note-head { border-color: rgba(175, 106, 116, 0.75); background-color: rgba(175, 106, 116, 0.18); }
+    .note-pill[data-motif-col="3"].motif-hovered .note-head { border-color: #7C3B45 !important; background-color: #AF6A74 !important; box-shadow: 0 0 10px rgba(175, 106, 116, 0.85) !important; }
+
+    /* 4: Vatican Slate */
+    .canon-motif-block[data-motif-col="4"] { background-color: rgba(75, 101, 132, 0.08); border-top-color: rgba(75, 101, 132, 0.50); }
+    .canon-motif-block[data-motif-col="4"] .canon-motif-label { color: #304359; background-color: rgba(75, 101, 132, 0.16); border: 1px solid rgba(75, 101, 132, 0.35); }
+    .canon-motif-block[data-motif-col="4"].motif-hovered { background-color: rgba(75, 101, 132, 0.22) !important; border-top-color: #4B6584 !important; }
+    .canon-motif-block[data-motif-col="4"].motif-hovered .canon-motif-label { background-color: #4B6584 !important; color: #FFFFFF !important; border-color: #304359 !important; font-weight: 700 !important; box-shadow: 0 1px 4px rgba(48, 67, 89, 0.4); }
+    .note-pill[data-motif-col="4"] .note-head { border-color: rgba(75, 101, 132, 0.75); background-color: rgba(75, 101, 132, 0.18); }
+    .note-pill[data-motif-col="4"].motif-hovered .note-head { border-color: #304359 !important; background-color: #4B6584 !important; box-shadow: 0 0 10px rgba(75, 101, 132, 0.85) !important; }
+
+    /* 5: Siena Amber */
+    .canon-motif-block[data-motif-col="5"] { background-color: rgba(198, 125, 59, 0.08); border-top-color: rgba(198, 125, 59, 0.50); }
+    .canon-motif-block[data-motif-col="5"] .canon-motif-label { color: #8F4D18; background-color: rgba(198, 125, 59, 0.16); border: 1px solid rgba(198, 125, 59, 0.35); }
+    .canon-motif-block[data-motif-col="5"].motif-hovered { background-color: rgba(198, 125, 59, 0.22) !important; border-top-color: #C67D3B !important; }
+    .canon-motif-block[data-motif-col="5"].motif-hovered .canon-motif-label { background-color: #C67D3B !important; color: #FFFFFF !important; border-color: #8F4D18 !important; font-weight: 700 !important; box-shadow: 0 1px 4px rgba(143, 77, 24, 0.4); }
+    .note-pill[data-motif-col="5"] .note-head { border-color: rgba(198, 125, 59, 0.75); background-color: rgba(198, 125, 59, 0.18); }
+    .note-pill[data-motif-col="5"].motif-hovered .note-head { border-color: #8F4D18 !important; background-color: #C67D3B !important; box-shadow: 0 0 10px rgba(198, 125, 59, 0.85) !important; }
+
+    /* 6: Celadon Aqua */
+    .canon-motif-block[data-motif-col="6"] { background-color: rgba(74, 124, 125, 0.08); border-top-color: rgba(74, 124, 125, 0.50); }
+    .canon-motif-block[data-motif-col="6"] .canon-motif-label { color: #2C5253; background-color: rgba(74, 124, 125, 0.16); border: 1px solid rgba(74, 124, 125, 0.35); }
+    .canon-motif-block[data-motif-col="6"].motif-hovered { background-color: rgba(74, 124, 125, 0.22) !important; border-top-color: #4A7C7D !important; }
+    .canon-motif-block[data-motif-col="6"].motif-hovered .canon-motif-label { background-color: #4A7C7D !important; color: #FFFFFF !important; border-color: #2C5253 !important; font-weight: 700 !important; box-shadow: 0 1px 4px rgba(44, 82, 83, 0.4); }
+    .note-pill[data-motif-col="6"] .note-head { border-color: rgba(74, 124, 125, 0.75); background-color: rgba(74, 124, 125, 0.18); }
+    .note-pill[data-motif-col="6"].motif-hovered .note-head { border-color: #2C5253 !important; background-color: #4A7C7D !important; box-shadow: 0 0 10px rgba(74, 124, 125, 0.85) !important; }
+
+    /* 7: Warm Bronze */
+    .canon-motif-block[data-motif-col="7"] { background-color: rgba(141, 103, 73, 0.08); border-top-color: rgba(141, 103, 73, 0.50); }
+    .canon-motif-block[data-motif-col="7"] .canon-motif-label { color: #5B3D24; background-color: rgba(141, 103, 73, 0.16); border: 1px solid rgba(141, 103, 73, 0.35); }
+    .canon-motif-block[data-motif-col="7"].motif-hovered { background-color: rgba(141, 103, 73, 0.22) !important; border-top-color: #8D6749 !important; }
+    .canon-motif-block[data-motif-col="7"].motif-hovered .canon-motif-label { background-color: #8D6749 !important; color: #FFFFFF !important; border-color: #5B3D24 !important; font-weight: 700 !important; box-shadow: 0 1px 4px rgba(91, 61, 36, 0.4); }
+    .note-pill[data-motif-col="7"] .note-head { border-color: rgba(141, 103, 73, 0.75); background-color: rgba(141, 103, 73, 0.18); }
+    .note-pill[data-motif-col="7"].motif-hovered .note-head { border-color: #5B3D24 !important; background-color: #8D6749 !important; box-shadow: 0 0 10px rgba(141, 103, 73, 0.85) !important; }
+
+    /* Final Cadence */
+    .canon-motif-block[data-motif-col="cadence"],
+    .canon-cadence-block {
+      background-color: rgba(197, 160, 89, 0.10);
+      border-top: 2.5px solid rgba(197, 160, 89, 0.65);
+    }
+    .note-pill[data-motif-col="cadence"] .note-head {
+      border-color: rgba(197, 160, 89, 0.8);
+      background-color: rgba(197, 160, 89, 0.25);
+    }
+    .note-pill[data-motif-col="cadence"].motif-hovered .note-head {
+      border-color: #8C6B28 !important;
+      background-color: #C5A059 !important;
+      box-shadow: 0 0 12px rgba(197, 160, 89, 0.9) !important;
     }
   </style>
 </head>
@@ -1002,7 +1114,7 @@
           <div class="flex flex-col sm:flex-row sm:items-center justify-between text-[11px] font-mono text-mutedInk pb-3 mb-3 border-b border-stoneBorder/60 gap-2">
             <span class="flex items-center space-x-1.5">
               <i data-lucide="info" class="w-3.5 h-3.5 text-terracotta shrink-0"></i>
-              <span>Strict 3-voice canon at the unison + cello continuo &bull; Click anywhere on staves to seek</span>
+              <span>Strict 3-voice canon: matching pastel bands highlight identical 2-measure themes imitated across violins &bull; Hover or click to explore</span>
             </span>
             <span class="text-terracotta uppercase tracking-wider font-semibold">Canon a 3 Violini e Basso &bull; D Major</span>
           </div>
@@ -1987,6 +2099,7 @@
           id: "violin1",
           name: "Violin I",
           range: "First Violin &bull; Leader",
+          entryBeat: 8,
           clef: "G2",
           color: "#C5A059", // Roman Antique Gold
           pan: -0.28,
@@ -1998,6 +2111,7 @@
           id: "violin2",
           name: "Violin II",
           range: "Second Violin &bull; Canon at 2 Bars",
+          entryBeat: 16,
           clef: "G2",
           color: "#B65D43", // Roman Terracotta
           pan: -0.10,
@@ -2009,6 +2123,7 @@
           id: "violin3",
           name: "Violin III",
           range: "Third Violin &bull; Canon at 4 Bars",
+          entryBeat: 24,
           clef: "G2",
           color: "#2C3E50", // Twilight Slate
           pan: 0.12,
@@ -2020,6 +2135,7 @@
           id: "basso",
           name: "Basso Continuo",
           range: "Cello &bull; 8-Chord Ground Bass",
+          entryBeat: 0,
           clef: "F4",
           color: "#191614", // Charcoal Walnut
           pan: 0.32,
@@ -2754,7 +2870,7 @@
         stavesHTML += `
           <div id="${prefix}-row-${voice.id}" class="flex items-center group/stave transition-opacity duration-200" style="width: max-content;">
             <!-- Voice Title Card -->
-            <div class="voice-header sticky left-0 z-10 w-44 sm:w-52 shrink-0 bg-white/95 backdrop-blur-md border border-stoneBorder/90 rounded-l p-2.5 sm:p-3 flex items-center justify-between shadow-xs">
+            <div class="voice-header sticky left-0 z-30 w-44 sm:w-52 shrink-0 bg-white/95 backdrop-blur-md border border-stoneBorder/90 rounded-l p-2.5 sm:p-3 flex items-center justify-between shadow-xs">
               <div>
                 <div class="flex items-center space-x-2">
                   <span class="w-2.5 h-2.5 rounded-full shadow-xs" style="background-color: ${voice.color}"></span>
@@ -2780,6 +2896,82 @@
               <!-- Final Double Barline (Fine) -->
               <div class="absolute top-0 bottom-0 border-l border-r-2 border-charcoal/60 pointer-events-none" style="left: ${scoreWidth}px; width: 4px;"></div>
 
+              <!-- Canon 2-Measure Motif Blocks & Tacet Indicators -->
+              ${(() => {
+                if (prefix !== 'canon') return '';
+                let blocksHTML = '';
+                if (voice.id === 'basso') {
+                  for (let rep = 0; rep < 28; rep++) {
+                    const startBeat = rep * 8;
+                    const leftPx = startBeat * BEAT_PIXEL_WIDTH;
+                    const widthPx = 8 * BEAT_PIXEL_WIDTH;
+                    const isEven = rep % 2 === 0;
+                    blocksHTML += `
+                      <div 
+                        class="basso-ground-block absolute top-0 bottom-0 select-none pointer-events-none transition-colors duration-150"
+                        style="left: ${leftPx}px; width: ${widthPx}px; background-color: ${isEven ? 'rgba(215, 205, 190, 0.05)' : 'rgba(215, 205, 190, 0.12)'}; border-top: 1px solid rgba(180, 160, 140, 0.35); border-left: 1px dashed rgba(220, 210, 195, 0.45); z-index: 2;"
+                      >
+                        <span class="absolute top-1 left-1.5 text-[7.5px] font-mono tracking-wider px-1 py-0.5 rounded text-charcoal/70 bg-white/80 border border-stoneBorder/60 select-none shadow-[0_1px_2px_rgba(0,0,0,0.03)]">Ground ${rep + 1}</span>
+                      </div>
+                    `;
+                  }
+                  blocksHTML += `
+                    <div 
+                      class="canon-cadence-block absolute top-0 bottom-0 select-none pointer-events-none"
+                      style="left: ${224 * BEAT_PIXEL_WIDTH}px; width: ${4 * BEAT_PIXEL_WIDTH}px; background-color: rgba(197, 160, 89, 0.10); border-top: 2.5px solid rgba(197, 160, 89, 0.65); border-left: 1px dashed rgba(197, 160, 89, 0.4); z-index: 2;"
+                    >
+                      <span class="absolute top-1 left-1.5 text-[8px] font-mono font-semibold text-romanGold tracking-wider bg-white/80 px-1 py-0.5 rounded border border-romanGold/40">Fine</span>
+                    </div>
+                  `;
+                } else {
+                  const entry = voice.entryBeat ?? 0;
+                  if (entry > 0) {
+                    blocksHTML += `
+                      <div 
+                        class="canon-tacet-block absolute top-0 bottom-0 flex items-center justify-center select-none pointer-events-none"
+                        style="left: 0; width: ${entry * BEAT_PIXEL_WIDTH}px; background-color: rgba(245, 240, 235, 0.45); border-right: 1px solid rgba(220, 210, 195, 0.6); z-index: 2;"
+                      >
+                        <span class="text-[9px] font-serif italic text-mutedInk/60 tracking-wide">
+                          Tacet (M.1&ndash;${entry / 4}) &bull; ${voice.id === 'violin1' ? 'Awaiting M.3' : 'Awaiting Imitation'}
+                        </span>
+                      </div>
+                    `;
+                  }
+                  const numMotifs = Math.floor((224 - entry) / 8);
+                  for (let m = 0; m < numMotifs; m++) {
+                    const startBeat = entry + m * 8;
+                    const leftPx = startBeat * BEAT_PIXEL_WIDTH;
+                    const widthPx = 8 * BEAT_PIXEL_WIDTH;
+                    const colIdx = m % 8;
+                    const themeNum = m + 1;
+                    blocksHTML += `
+                      <div 
+                        class="canon-motif-block absolute top-0 bottom-0 cursor-pointer select-none"
+                        data-motif="${m}"
+                        data-motif-col="${colIdx}"
+                        style="left: ${leftPx}px; width: ${widthPx}px;"
+                        title="Theme ${themeNum} (M.${startBeat / 4 + 1}&ndash;${startBeat / 4 + 2}) &bull; Click to seek"
+                      >
+                        <span class="canon-motif-label absolute top-1 left-1.5 text-[8px] font-mono tracking-wider px-1.5 py-0.5 rounded border select-none pointer-events-none transition-all duration-150">
+                          Theme ${themeNum}
+                        </span>
+                      </div>
+                    `;
+                  }
+                  blocksHTML += `
+                    <div 
+                      class="canon-cadence-block absolute top-0 bottom-0 select-none pointer-events-none"
+                      data-motif="cadence"
+                      data-motif-col="cadence"
+                      style="left: ${224 * BEAT_PIXEL_WIDTH}px; width: ${4 * BEAT_PIXEL_WIDTH}px; z-index: 2;"
+                    >
+                      <span class="absolute top-1 left-1.5 text-[8px] font-mono font-semibold text-romanGold tracking-wider">Fine</span>
+                    </div>
+                  `;
+                }
+                return blocksHTML;
+              })()}
+
               <!-- Notes -->
               ${voice.notes.map((n, idx) => {
                 const notePitchIdx = PITCH_ORDER.indexOf(n.note);
@@ -2788,11 +2980,23 @@
                 const leftX = n.beat * BEAT_PIXEL_WIDTH;
                 const widthPx = Math.max(14, (n.dur * BEAT_PIXEL_WIDTH) - 2);
 
+                let motifAttrs = '';
+                if (prefix === 'canon' && voice.id.startsWith('violin')) {
+                  const entry = voice.entryBeat ?? 0;
+                  if (n.beat >= entry && n.beat < 224) {
+                    const m = Math.floor((n.beat - entry) / 8);
+                    motifAttrs = `data-motif="${m}" data-motif-col="${m % 8}"`;
+                  } else if (n.beat >= 224) {
+                    motifAttrs = `data-motif="cadence" data-motif-col="cadence"`;
+                  }
+                }
+
                 return `
                   <div 
                     id="note-${prefix}-${voice.id}-${idx}" 
                     class="note-pill absolute flex flex-col items-center justify-center transition-all duration-150 rounded cursor-pointer group/note"
-                    style="left: ${leftX}px; width: ${widthPx}px; bottom: ${bottomY}px; height: 32px;"
+                    ${motifAttrs}
+                    style="left: ${leftX}px; width: ${widthPx}px; bottom: ${bottomY}px; height: 32px; z-index: 10;"
                     title="${voice.name}: ${n.note} (${n.dur} beats) ${n.lyric ? '&bull; ' + n.lyric : ''}"
                   >
                     <div class="note-head w-2.5 h-2.5 rotate-45 border border-stoneBorder bg-white transition-all duration-150 shadow-xs"></div>
@@ -2890,6 +3094,40 @@
       renderScoreStaves('canonStavesContainer', 'canonRuler', PACHELBEL_VOICES, CANON_TOTAL_BEATS, 'canon');
       updateAllAudioUI();
       updateCanonLatencyUI();
+
+      // Interactive cross-voice motif highlights for Canon in D
+      const canonWrapper = document.getElementById('canonScrollWrapper');
+      if (canonWrapper) {
+        let activeHoverMotif = null;
+
+        canonWrapper.addEventListener('mouseover', (e) => {
+          const target = e.target.closest('[data-motif]');
+          const motif = target ? target.getAttribute('data-motif') : null;
+          if (motif === activeHoverMotif) return;
+
+          if (activeHoverMotif !== null) {
+            canonWrapper.querySelectorAll(`[data-motif="${activeHoverMotif}"]`).forEach(el => {
+              el.classList.remove('motif-hovered');
+            });
+          }
+
+          activeHoverMotif = motif;
+          if (activeHoverMotif !== null) {
+            canonWrapper.querySelectorAll(`[data-motif="${activeHoverMotif}"]`).forEach(el => {
+              el.classList.add('motif-hovered');
+            });
+          }
+        });
+
+        canonWrapper.addEventListener('mouseleave', () => {
+          if (activeHoverMotif !== null) {
+            canonWrapper.querySelectorAll(`[data-motif="${activeHoverMotif}"]`).forEach(el => {
+              el.classList.remove('motif-hovered');
+            });
+            activeHoverMotif = null;
+          }
+        });
+      }
     });
     /* ========================================================
        3. PINCIAN SUNSET SIMULATOR
