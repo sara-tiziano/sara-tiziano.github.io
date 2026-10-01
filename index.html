@@ -923,10 +923,10 @@
               <div class="flex items-center space-x-2">
                 <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i>
                 <h4 class="font-serif text-sm font-semibold text-charcoal">Audacity Warp Map Active</h4>
-                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold tracking-wider">30 Landmarks Locked</span>
+                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold tracking-wider">37 Landmarks Locked</span>
               </div>
               <p class="text-[11px] font-mono text-mutedInk mt-0.5">
-                Calibrated to all 28 variations and cadence rallentando from your Audacity labels.
+                Calibrated to all 28 variations and note-by-note cadence rallentando from your Audacity labels.
               </p>
             </div>
             
@@ -985,11 +985,12 @@
               <span class="text-mutedInk mr-0.5">Jump to:</span>
               <button onclick="jumpCanonToBeat(0)" class="px-2 py-0.5 rounded bg-white border border-stoneBorder hover:border-terracotta text-charcoal cursor-pointer">M.1 Intro (1.3s)</button>
               <button onclick="jumpCanonToBeat(8)" class="px-2 py-0.5 rounded bg-white border border-stoneBorder hover:border-terracotta text-charcoal cursor-pointer">M.3 Vln 1 (10.4s)</button>
-              <button onclick="jumpCanonToBeat(16)" class="px-2 py-0.5 rounded bg-white border border-stoneBorder hover:border-terracotta text-charcoal cursor-pointer">M.5 Vln 2 (19.7s)</button>
-              <button onclick="jumpCanonToBeat(24)" class="px-2 py-0.5 rounded bg-white border border-stoneBorder hover:border-terracotta text-charcoal cursor-pointer">M.7 Vln 3 (29.1s)</button>
+              <button onclick="jumpCanonToBeat(16)" class="px-2 py-0.5 rounded bg-white border border-stoneBorder hover:border-terracotta text-charcoal cursor-pointer">M.5 Vln 2 (19.6s)</button>
+              <button onclick="jumpCanonToBeat(24)" class="px-2 py-0.5 rounded bg-white border border-stoneBorder hover:border-terracotta text-charcoal cursor-pointer">M.7 Vln 3 (29.0s)</button>
               <button onclick="jumpCanonToBeat(64)" class="px-2 py-0.5 rounded bg-white border border-stoneBorder hover:border-terracotta text-charcoal cursor-pointer">M.17 Runs (76.4s)</button>
               <button onclick="jumpCanonToBeat(128)" class="px-2 py-0.5 rounded bg-white border border-stoneBorder hover:border-terracotta text-charcoal cursor-pointer">M.33 Arpeggios (150.7s)</button>
-              <button onclick="jumpCanonToBeat(224)" class="px-2 py-0.5 rounded bg-white border border-stoneBorder hover:border-terracotta text-charcoal cursor-pointer">M.57 Cadence (274.4s)</button>
+              <button onclick="jumpCanonToBeat(216)" class="px-2 py-0.5 rounded bg-white border border-stoneBorder hover:border-terracotta text-charcoal cursor-pointer">M.55 Cadence (260.6s)</button>
+              <button onclick="jumpCanonToBeat(224)" class="px-2 py-0.5 rounded bg-white border border-stoneBorder hover:border-terracotta text-charcoal cursor-pointer">M.57 Final (273.8s)</button>
             </div>
           </div>
         </div>
@@ -2419,36 +2420,43 @@
        Calibrated directly to all 28 variations in the live recording
        ======================================================== */
     const CANON_WARP_MARKERS = [
-      { beat: 0,   time: 1.340371 },
+      { beat: 0,   time: 1.320888 },
       { beat: 8,   time: 10.448574 },
-      { beat: 16,  time: 19.706998 },
-      { beat: 24,  time: 29.057386 },
-      { beat: 32,  time: 38.418172 },
-      { beat: 40,  time: 47.921128 },
+      { beat: 16,  time: 19.562479 },
+      { beat: 24,  time: 28.980525 },
+      { beat: 32,  time: 38.353368 },
+      { beat: 40,  time: 47.797459 },
       { beat: 48,  time: 57.196599 },
       { beat: 56,  time: 66.620448 },
-      { beat: 64,  time: 76.361945 },
-      { beat: 72,  time: 86.049019 },
+      { beat: 64,  time: 76.390490 },
+      { beat: 72,  time: 86.077747 },
       { beat: 80,  time: 95.213645 },
-      { beat: 88,  time: 104.182600 },
+      { beat: 88,  time: 104.288937 },
       { beat: 96,  time: 113.346979 },
-      { beat: 104, time: 122.587795 },
-      { beat: 112, time: 131.850380 },
+      { beat: 104, time: 122.539819 },
+      { beat: 112, time: 131.984748 },
       { beat: 120, time: 141.341536 },
-      { beat: 128, time: 150.716347 },
-      { beat: 136, time: 159.964666 },
-      { beat: 144, time: 169.107523 },
+      { beat: 128, time: 150.686662 },
+      { beat: 136, time: 159.991095 },
+      { beat: 144, time: 169.041414 },
       { beat: 152, time: 178.402761 },
       { beat: 160, time: 187.600040 },
-      { beat: 168, time: 196.949700 },
-      { beat: 176, time: 207.047809 },
-      { beat: 184, time: 217.609877 },
-      { beat: 192, time: 228.322790 },
-      { beat: 200, time: 239.540176 },
+      { beat: 168, time: 197.046739 },
+      { beat: 176, time: 207.210635 },
+      { beat: 184, time: 217.763990 },
+      { beat: 192, time: 228.412935 },
+      { beat: 200, time: 239.348995 },
       { beat: 208, time: 250.065346 },
       { beat: 216, time: 260.590516 },
-      { beat: 224, time: 274.413645 },
-      { beat: 225, time: 280.415797 }
+      { beat: 217, time: 261.899506 },
+      { beat: 218, time: 263.206055 },
+      { beat: 219, time: 264.456471 },
+      { beat: 220, time: 265.831340 },
+      { beat: 221, time: 267.270803 },
+      { beat: 222, time: 268.647744 },
+      { beat: 223, time: 270.397714 },
+      { beat: 224, time: 273.755600 },
+      { beat: 225, time: 280.478842 }
     ];
 
     let canonLatencyNudge = parseFloat(localStorage.getItem('canon_latency_nudge') || '0.00');
