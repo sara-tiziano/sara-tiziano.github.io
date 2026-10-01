@@ -915,6 +915,166 @@
           </div>
         </div>
 
+        <!-- Audio & Score Synchronization Calibration Panel -->
+        <div id="canonSyncPanel" class="mb-6 p-4 sm:p-5 bg-[#FAF7F2] rounded border border-stoneBorder/90 shadow-2xs">
+          <div class="flex flex-col md:flex-row md:items-center justify-between pb-3 mb-3 border-b border-stoneBorder/70 gap-2">
+            <div>
+              <div class="flex items-center space-x-2">
+                <i data-lucide="sliders" class="w-4 h-4 text-terracotta"></i>
+                <h4 class="font-serif text-sm font-semibold text-charcoal">Score Synchronization Calibration</h4>
+                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-terracotta/10 text-terracotta font-semibold tracking-wider">Live Tuning</span>
+              </div>
+              <p class="text-[11px] font-mono text-mutedInk mt-0.5">
+                Adjust offset to align beat 1 with the cello entry, then adjust tempo multiplier to keep subsequent measures in lockstep.
+              </p>
+            </div>
+            
+            <div class="flex items-center space-x-2">
+              <button 
+                onclick="resetCanonSync()"
+                class="px-2.5 py-1 text-[11px] font-mono rounded border border-stoneBorder hover:border-charcoal text-mutedInk hover:text-charcoal bg-white transition-colors cursor-pointer"
+                title="Reset to 0.00s and 1.000x"
+              >
+                Reset
+              </button>
+              <button 
+                id="canonCopySyncBtn"
+                onclick="copyCanonSyncValues()"
+                class="px-3 py-1 text-[11px] font-mono font-semibold rounded bg-charcoal hover:bg-terracotta text-travertine flex items-center space-x-1.5 transition-colors cursor-pointer shadow-2xs"
+              >
+                <i data-lucide="copy" class="w-3 h-3 text-romanGold"></i>
+                <span id="canonCopySyncLabel">Copy Values</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Controls Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 text-xs font-mono">
+            <!-- 1. Offset Control -->
+            <div class="bg-white p-3.5 rounded border border-stoneBorder/80 flex flex-col justify-between shadow-2xs">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-semibold text-charcoal flex items-center space-x-1.5">
+                  <i data-lucide="clock" class="w-3.5 h-3.5 text-romanGold"></i>
+                  <span>Start Audio Offset (Delay)</span>
+                </span>
+                <div class="flex items-center space-x-1.5">
+                  <input 
+                    type="number" 
+                    id="canonOffsetNum" 
+                    value="0.00" 
+                    step="0.05" 
+                    min="-15" 
+                    max="15" 
+                    oninput="onCanonOffsetInputChange(this.value)"
+                    class="w-20 px-2 py-0.5 text-right font-mono text-xs font-bold text-charcoal bg-parchment/60 rounded border border-stoneBorder focus:border-terracotta outline-none"
+                  />
+                  <span class="text-mutedInk font-bold">s</span>
+                </div>
+              </div>
+
+              <!-- Range Slider -->
+              <input 
+                type="range" 
+                id="canonOffsetSlider" 
+                min="-10.0" 
+                max="10.0" 
+                step="0.05" 
+                value="0.00" 
+                oninput="onCanonOffsetSliderChange(this.value)"
+                class="w-full accent-terracotta cursor-pointer my-2"
+              />
+
+              <!-- Nudge buttons -->
+              <div class="flex items-center justify-between pt-1.5 border-t border-stoneBorder/40 text-[10px] text-mutedInk">
+                <span>Nudge offset:</span>
+                <div class="flex items-center space-x-1">
+                  <button onclick="nudgeCanonOffset(-1.0)" class="px-1.5 py-0.5 rounded bg-parchment hover:bg-stoneBorder/50 cursor-pointer">-1s</button>
+                  <button onclick="nudgeCanonOffset(-0.1)" class="px-1.5 py-0.5 rounded bg-parchment hover:bg-stoneBorder/50 cursor-pointer">-0.1s</button>
+                  <button onclick="nudgeCanonOffset(-0.02)" class="px-1.5 py-0.5 rounded bg-parchment hover:bg-stoneBorder/50 cursor-pointer">-0.02s</button>
+                  <span class="text-stoneBorder">|</span>
+                  <button onclick="nudgeCanonOffset(+0.02)" class="px-1.5 py-0.5 rounded bg-parchment hover:bg-stoneBorder/50 cursor-pointer">+0.02s</button>
+                  <button onclick="nudgeCanonOffset(+0.1)" class="px-1.5 py-0.5 rounded bg-parchment hover:bg-stoneBorder/50 cursor-pointer">+0.1s</button>
+                  <button onclick="nudgeCanonOffset(+1.0)" class="px-1.5 py-0.5 rounded bg-parchment hover:bg-stoneBorder/50 cursor-pointer">+1s</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Multiplier Control -->
+            <div class="bg-white p-3.5 rounded border border-stoneBorder/80 flex flex-col justify-between shadow-2xs">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-semibold text-charcoal flex items-center space-x-1.5">
+                  <i data-lucide="gauge" class="w-3.5 h-3.5 text-romanGold"></i>
+                  <span>Tempo Multiplier (Speed)</span>
+                </span>
+                <div class="flex items-center space-x-1.5">
+                  <input 
+                    type="number" 
+                    id="canonMultiplierNum" 
+                    value="1.000" 
+                    step="0.005" 
+                    min="0.5" 
+                    max="2.0" 
+                    oninput="onCanonMultiplierInputChange(this.value)"
+                    class="w-20 px-2 py-0.5 text-right font-mono text-xs font-bold text-charcoal bg-parchment/60 rounded border border-stoneBorder focus:border-terracotta outline-none"
+                  />
+                  <span class="text-mutedInk font-bold">&times;</span>
+                </div>
+              </div>
+
+              <!-- Range Slider -->
+              <input 
+                type="range" 
+                id="canonMultiplierSlider" 
+                min="0.800" 
+                max="1.250" 
+                step="0.001" 
+                value="1.000" 
+                oninput="onCanonMultiplierSliderChange(this.value)"
+                class="w-full accent-terracotta cursor-pointer my-2"
+              />
+
+              <!-- Nudge buttons -->
+              <div class="flex items-center justify-between pt-1.5 border-t border-stoneBorder/40 text-[10px] text-mutedInk">
+                <span>Nudge tempo:</span>
+                <div class="flex items-center space-x-1">
+                  <button onclick="nudgeCanonMultiplier(-0.02)" class="px-1.5 py-0.5 rounded bg-parchment hover:bg-stoneBorder/50 cursor-pointer">-0.02</button>
+                  <button onclick="nudgeCanonMultiplier(-0.005)" class="px-1.5 py-0.5 rounded bg-parchment hover:bg-stoneBorder/50 cursor-pointer">-0.005</button>
+                  <button onclick="nudgeCanonMultiplier(-0.001)" class="px-1.5 py-0.5 rounded bg-parchment hover:bg-stoneBorder/50 cursor-pointer">-0.001</button>
+                  <span class="text-stoneBorder">|</span>
+                  <button onclick="nudgeCanonMultiplier(+0.001)" class="px-1.5 py-0.5 rounded bg-parchment hover:bg-stoneBorder/50 cursor-pointer">+0.001</button>
+                  <button onclick="nudgeCanonMultiplier(+0.005)" class="px-1.5 py-0.5 rounded bg-parchment hover:bg-stoneBorder/50 cursor-pointer">+0.005</button>
+                  <button onclick="nudgeCanonMultiplier(+0.02)" class="px-1.5 py-0.5 rounded bg-parchment hover:bg-stoneBorder/50 cursor-pointer">+0.02</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Telemetry & Jump Scrubbers -->
+          <div class="mt-3.5 pt-3 border-t border-stoneBorder/60 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs font-mono">
+            <!-- Live status readout -->
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="text-mutedInk">Live Telemetry:</span>
+              <span id="canonLiveTelemetry" class="px-2.5 py-0.5 rounded bg-white border border-stoneBorder text-charcoal font-semibold">
+                Time: 0.00s &bull; Beat: 0.00 (M.1)
+              </span>
+              <span id="canonTempoTelemetry" class="px-2.5 py-0.5 rounded bg-white border border-stoneBorder text-mutedInk">
+                Rate: 0.573 b/s (34.4 BPM)
+              </span>
+            </div>
+
+            <!-- Quick Jumps -->
+            <div class="flex flex-wrap items-center gap-1.5 text-[10px]">
+              <span class="text-mutedInk mr-0.5">Jump to:</span>
+              <button onclick="jumpCanonToBeat(0)" class="px-2 py-0.5 rounded bg-white border border-stoneBorder hover:border-terracotta text-charcoal cursor-pointer">M.1 Intro</button>
+              <button onclick="jumpCanonToBeat(8)" class="px-2 py-0.5 rounded bg-white border border-stoneBorder hover:border-terracotta text-charcoal cursor-pointer">M.3 Vln 1</button>
+              <button onclick="jumpCanonToBeat(16)" class="px-2 py-0.5 rounded bg-white border border-stoneBorder hover:border-terracotta text-charcoal cursor-pointer">M.5 Vln 2</button>
+              <button onclick="jumpCanonToBeat(24)" class="px-2 py-0.5 rounded bg-white border border-stoneBorder hover:border-terracotta text-charcoal cursor-pointer">M.7 Vln 3</button>
+              <button onclick="jumpCanonToBeat(64)" class="px-2 py-0.5 rounded bg-white border border-stoneBorder hover:border-terracotta text-charcoal cursor-pointer">M.17 Runs</button>
+              <button onclick="jumpCanonToBeat(128)" class="px-2 py-0.5 rounded bg-white border border-stoneBorder hover:border-terracotta text-charcoal cursor-pointer">M.33 Arpeggios</button>
+            </div>
+          </div>
+        </div>
+
         <!-- The 4-Part Score Container -->
         <div class="relative bg-[#FAF7F2] rounded border border-stoneBorder/90 p-2 sm:p-5 overflow-hidden">
           
@@ -2335,6 +2495,188 @@
       }
     }
 
+    /* ========================================================
+       CANON SYNCHRONIZATION CALIBRATION LOGIC
+       ======================================================== */
+    let canonSyncOffset = parseFloat(localStorage.getItem('canon_sync_offset') || '0.00');
+    let canonSyncMultiplier = parseFloat(localStorage.getItem('canon_sync_multiplier') || '1.000');
+
+    function getCanonBeatFromTime(timeSec) {
+      const elapsed = Math.max(0, timeSec - canonSyncOffset);
+      const baseRate = CANON_TOTAL_BEATS / (audioCanon.duration || 392.73);
+      return elapsed * baseRate * canonSyncMultiplier;
+    }
+
+    function getCanonTimeFromBeat(beat) {
+      const baseRate = CANON_TOTAL_BEATS / (audioCanon.duration || 392.73);
+      const effectiveRate = baseRate * canonSyncMultiplier;
+      return canonSyncOffset + (beat / effectiveRate);
+    }
+
+    function updateCanonVisuals(curBeat, curTime, isAutoScroll = false) {
+      const headerOffset = window.innerWidth >= 640 ? 208 : 176;
+
+      // Move playhead
+      const canonPlayhead = document.getElementById('canonPlayhead');
+      if (canonPlayhead) {
+        canonPlayhead.style.left = `${headerOffset + (curBeat * BEAT_PIXEL_WIDTH)}px`;
+      }
+
+      // Active notes
+      PACHELBEL_VOICES.forEach(voice => {
+        voice.notes.forEach((note, idx) => {
+          const el = document.getElementById(`note-canon-${voice.id}-${idx}`);
+          if (!el) return;
+          if (curBeat >= note.beat && curBeat < (note.beat + note.dur)) {
+            el.classList.add('note-active');
+          } else {
+            el.classList.remove('note-active');
+          }
+        });
+      });
+
+      // Measure badge
+      const curMeas = Math.floor(curBeat / 4) + 1;
+      const badge = document.getElementById('canonMeasureBadge');
+      if (badge) {
+        let label = `M.${curMeas} &bull; Flowing Baroque Variations`;
+        if (curBeat < 8) label = `M.${curMeas} &bull; Basso Continuo Solo`;
+        else if (curBeat < 16) label = `M.${curMeas} &bull; Violin I Enters (The Iconic Theme)`;
+        else if (curBeat < 24) label = `M.${curMeas} &bull; Violin II Joins (Canon at the Unison)`;
+        else if (curBeat < 40) label = `M.${curMeas} &bull; Violin III Joins (Full 4-Part Strings)`;
+        else if (curBeat > 216) label = `M.${curMeas} &bull; Grand Cadence in D Major`;
+        badge.innerHTML = label;
+      }
+
+      // 8-Chord Ground Bass Highlight
+      const chordIdx = Math.floor(curBeat) % 8;
+      for (let c = 0; c < 8; c++) {
+        const chordEl = document.getElementById(`chord-${c}`);
+        if (chordEl) {
+          if (c === chordIdx) {
+            chordEl.className = "px-2.5 py-1 rounded bg-terracotta text-white font-bold shadow-xs scale-105 transition-all";
+          } else {
+            chordEl.className = "px-2.5 py-1 rounded bg-white border border-stoneBorder font-semibold text-charcoal transition-all";
+          }
+        }
+      }
+
+      // Time text
+      const curTimeEl = document.getElementById('canonTimeCurrent');
+      if (curTimeEl) curTimeEl.textContent = formatTime(curTime);
+
+      // Telemetry in calibration panel
+      const liveTelem = document.getElementById('canonLiveTelemetry');
+      if (liveTelem) {
+        liveTelem.innerHTML = `Time: <strong>${curTime.toFixed(2)}s</strong> &bull; Beat: <strong>${curBeat.toFixed(2)}</strong> (M.${curMeas})`;
+      }
+      const tempoTelem = document.getElementById('canonTempoTelemetry');
+      if (tempoTelem) {
+        const dur = audioCanon.duration || 392.73;
+        const rate = (CANON_TOTAL_BEATS / dur) * canonSyncMultiplier;
+        const bpm = rate * 60;
+        tempoTelem.textContent = `Rate: ${rate.toFixed(3)} b/s (${bpm.toFixed(1)} BPM)`;
+      }
+
+      // Auto-scroll
+      if (isAutoScroll) {
+        const wrapper = document.getElementById('canonScrollWrapper');
+        if (wrapper) {
+          const noteX = curBeat * BEAT_PIXEL_WIDTH;
+          const targetScroll = Math.max(0, noteX - (wrapper.clientWidth * 0.45) + headerOffset);
+          wrapper.scrollLeft = wrapper.scrollLeft + (targetScroll - wrapper.scrollLeft) * 0.15;
+        }
+      }
+    }
+
+    function updateCanonSyncInputs() {
+      const offsetSlider = document.getElementById('canonOffsetSlider');
+      const offsetNum = document.getElementById('canonOffsetNum');
+      const multSlider = document.getElementById('canonMultiplierSlider');
+      const multNum = document.getElementById('canonMultiplierNum');
+
+      if (offsetSlider) offsetSlider.value = canonSyncOffset.toFixed(2);
+      if (offsetNum) offsetNum.value = canonSyncOffset.toFixed(2);
+      if (multSlider) multSlider.value = canonSyncMultiplier.toFixed(3);
+      if (multNum) multNum.value = canonSyncMultiplier.toFixed(3);
+
+      localStorage.setItem('canon_sync_offset', canonSyncOffset.toFixed(2));
+      localStorage.setItem('canon_sync_multiplier', canonSyncMultiplier.toFixed(3));
+
+      const curTime = audioCanon.currentTime;
+      const curBeat = getCanonBeatFromTime(curTime);
+      updateCanonVisuals(curBeat, curTime, false);
+    }
+
+    function onCanonOffsetSliderChange(val) {
+      canonSyncOffset = parseFloat(parseFloat(val).toFixed(2));
+      updateCanonSyncInputs();
+    }
+    function onCanonOffsetInputChange(val) {
+      const p = parseFloat(val);
+      if (!isNaN(p)) {
+        canonSyncOffset = p;
+        updateCanonSyncInputs();
+      }
+    }
+    function nudgeCanonOffset(delta) {
+      canonSyncOffset = parseFloat((canonSyncOffset + delta).toFixed(2));
+      updateCanonSyncInputs();
+    }
+
+    function onCanonMultiplierSliderChange(val) {
+      canonSyncMultiplier = parseFloat(parseFloat(val).toFixed(3));
+      updateCanonSyncInputs();
+    }
+    function onCanonMultiplierInputChange(val) {
+      const p = parseFloat(val);
+      if (!isNaN(p)) {
+        canonSyncMultiplier = p;
+        updateCanonSyncInputs();
+      }
+    }
+    function nudgeCanonMultiplier(delta) {
+      canonSyncMultiplier = parseFloat((canonSyncMultiplier + delta).toFixed(3));
+      updateCanonSyncInputs();
+    }
+
+    function resetCanonSync() {
+      canonSyncOffset = 0.00;
+      canonSyncMultiplier = 1.000;
+      updateCanonSyncInputs();
+    }
+
+    function copyCanonSyncValues() {
+      const text = `offset: ${canonSyncOffset.toFixed(2)}s, multiplier: ${canonSyncMultiplier.toFixed(3)}`;
+      const label = document.getElementById('canonCopySyncLabel');
+      const btn = document.getElementById('canonCopySyncBtn');
+      const copySuccess = () => {
+        if (label) label.textContent = "Copied!";
+        if (btn) btn.classList.add('bg-emerald-700');
+        setTimeout(() => {
+          if (label) label.textContent = "Copy Values";
+          if (btn) btn.classList.remove('bg-emerald-700');
+        }, 1800);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(copySuccess).catch(() => {
+          prompt("Copy sync calibration values:", text);
+        });
+      } else {
+        prompt("Copy sync calibration values:", text);
+      }
+    }
+
+    function jumpCanonToBeat(targetBeat) {
+      const targetTime = getCanonTimeFromBeat(targetBeat);
+      const dur = audioCanon.duration || 392.73;
+      audioCanon.currentTime = Math.min(dur - 0.5, Math.max(0, targetTime));
+      updateCanonVisuals(targetBeat, audioCanon.currentTime, true);
+      if (audioCanon.paused) {
+        toggleCanonAudio();
+      }
+    }
+
     function handleCanonStaveClick(event) {
       const wrapper = document.getElementById('canonScrollWrapper');
       if (!wrapper) return;
@@ -2343,11 +2685,7 @@
       const headerOffset = window.innerWidth >= 640 ? 208 : 176;
       const noteX = Math.max(0, clickX - headerOffset);
       const clickedBeat = noteX / BEAT_PIXEL_WIDTH;
-      const dur = audioCanon.duration || 392.8;
-      audioCanon.currentTime = Math.min(dur - 0.5, Math.max(0, (clickedBeat / CANON_TOTAL_BEATS) * dur));
-      if (audioCanon.paused) {
-        toggleCanonAudio();
-      }
+      jumpCanonToBeat(clickedBeat);
     }
 
     /* 3. UNIVERSAL PAUSE & NAVIGATION BUTTON */
@@ -2579,65 +2917,8 @@
         // B. Update Canon in D
         if (currentAudioTrack === 'canon' && !audioCanon.paused) {
           const curTime = audioCanon.currentTime;
-          const dur = audioCanon.duration || 392.8;
-          const curBeat = (curTime / dur) * CANON_TOTAL_BEATS;
-
-          // Move playhead
-          const canonPlayhead = document.getElementById('canonPlayhead');
-          if (canonPlayhead) {
-            canonPlayhead.style.left = `${headerOffset + (curBeat * BEAT_PIXEL_WIDTH)}px`;
-          }
-
-          // Active notes
-          PACHELBEL_VOICES.forEach(voice => {
-            voice.notes.forEach((note, idx) => {
-              const el = document.getElementById(`note-canon-${voice.id}-${idx}`);
-              if (!el) return;
-              if (curBeat >= note.beat && curBeat < (note.beat + note.dur)) {
-                el.classList.add('note-active');
-              } else {
-                el.classList.remove('note-active');
-              }
-            });
-          });
-
-          // Measure badge
-          const curMeas = Math.floor(curBeat / 4) + 1;
-          const badge = document.getElementById('canonMeasureBadge');
-          if (badge) {
-            let label = `M.${curMeas} &bull; Flowing Baroque Variations`;
-            if (curBeat < 8) label = `M.${curMeas} &bull; Basso Continuo Solo`;
-            else if (curBeat < 16) label = `M.${curMeas} &bull; Violin I Enters (The Iconic Theme)`;
-            else if (curBeat < 24) label = `M.${curMeas} &bull; Violin II Joins (Canon at the Unison)`;
-            else if (curBeat < 40) label = `M.${curMeas} &bull; Violin III Joins (Full 4-Part Strings)`;
-            else if (curBeat > 216) label = `M.${curMeas} &bull; Grand Cadence in D Major`;
-            badge.innerHTML = label;
-          }
-
-          // 8-Chord Ground Bass Highlight
-          const chordIdx = Math.floor(curBeat) % 8;
-          for (let c = 0; c < 8; c++) {
-            const chordEl = document.getElementById(`chord-${c}`);
-            if (chordEl) {
-              if (c === chordIdx) {
-                chordEl.className = "px-2.5 py-1 rounded bg-terracotta text-white font-bold shadow-xs scale-105 transition-all";
-              } else {
-                chordEl.className = "px-2.5 py-1 rounded bg-white border border-stoneBorder font-semibold text-charcoal transition-all";
-              }
-            }
-          }
-
-          // Time text
-          const curTimeEl = document.getElementById('canonTimeCurrent');
-          if (curTimeEl) curTimeEl.textContent = formatTime(curTime);
-
-          // Auto-scroll
-          const wrapper = document.getElementById('canonScrollWrapper');
-          if (wrapper) {
-            const noteX = curBeat * BEAT_PIXEL_WIDTH;
-            const targetScroll = Math.max(0, noteX - (wrapper.clientWidth * 0.45) + headerOffset);
-            wrapper.scrollLeft = wrapper.scrollLeft + (targetScroll - wrapper.scrollLeft) * 0.15;
-          }
+          const curBeat = getCanonBeatFromTime(curTime);
+          updateCanonVisuals(curBeat, curTime, true);
         }
 
         if (currentAudioTrack !== null) {
@@ -2653,6 +2934,7 @@
       renderScoreStaves('palestrinaStavesContainer', 'palestrinaRuler', PALESTRINA_VOICES, PALESTRINA_TOTAL_BEATS, 'palestrina');
       renderScoreStaves('canonStavesContainer', 'canonRuler', PACHELBEL_VOICES, CANON_TOTAL_BEATS, 'canon');
       updateAllAudioUI();
+      updateCanonSyncInputs();
     });
     /* ========================================================
        3. PINCIAN SUNSET SIMULATOR
