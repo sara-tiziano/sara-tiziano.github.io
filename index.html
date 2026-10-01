@@ -150,7 +150,7 @@
         <a href="#heritage" class="hover:text-charcoal transition-colors">Sacred Heritage</a>
         <a href="#polyphony" class="hover:text-charcoal transition-colors flex items-center space-x-1.5">
           <i data-lucide="music" class="w-3 h-3 text-romanGold"></i>
-          <span>Palestrina Score</span>
+          <span id="navScoreLinkText">Polyphony &amp; Canon</span>
         </a>
         <a href="#pincio-light" class="hover:text-charcoal transition-colors">Pincio Sunset</a>
         <a href="#sensory" class="hover:text-charcoal transition-colors">Sensory Ephemera</a>
@@ -189,7 +189,7 @@
         <a href="#heritage" class="mobile-nav-link hover:text-charcoal py-1">Sacred Art &amp; History</a>
         <a href="#polyphony" class="mobile-nav-link hover:text-charcoal py-1 flex items-center space-x-2">
           <i data-lucide="music" class="w-3.5 h-3.5 text-romanGold"></i>
-          <span>Palestrina: Sicut Cervus (Score)</span>
+          <span>Music: Palestrina &amp; Pachelbel (Score)</span>
         </a>
         <a href="#archive-status" class="mobile-nav-link hover:text-charcoal py-1">Archive Status &amp; Note</a>
         <a href="#pincio-light" class="mobile-nav-link hover:text-charcoal py-1">Pincio Sunset Simulator</a>
@@ -474,14 +474,14 @@
     </section>
 
     <!-- ========================================================
-         PALESTRINA POLYPHONY & SACRED SCORE SECTION
+         SACRED POLYPHONY & BAROQUE CANON SCORE SECTION
          ======================================================== -->
     <section id="polyphony" class="py-24 px-4 sm:px-6 max-w-6xl mx-auto border-b border-stoneBorder/80">
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <span class="font-display text-[10px] uppercase tracking-[0.35em] text-romanGold font-semibold">Polyphonia Sacra &bull; Cappella Giulia</span>
-        <h2 class="font-serif text-4xl sm:text-5xl font-light text-charcoal mt-2 mb-3">Palestrina in the Chapel of the Choir</h2>
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span id="scoreOverheading" class="font-display text-[10px] uppercase tracking-[0.35em] text-romanGold font-semibold">Polyphonia Sacra &bull; Cappella Giulia</span>
+        <h2 id="scoreMainHeading" class="font-serif text-4xl sm:text-5xl font-light text-charcoal mt-2 mb-3">Palestrina in the Chapel of the Choir</h2>
         <div class="w-12 h-px bg-terracotta mx-auto mb-5"></div>
-        <p class="font-serif text-base sm:text-lg italic text-mutedInk leading-relaxed">
+        <p id="scoreSubtitle" class="font-serif text-base sm:text-lg italic text-mutedInk leading-relaxed">
           Giovanni Pierluigi da Palestrina (c. 1525&ndash;1594) composed in this very chapel as Master of the Vatican Choir. During our marriage service, his motet <em>Sicut Cervus</em> (Psalm 42) resonated through Maderno&rsquo;s choir stalls. Explore each voice below as the Renaissance score unfolds in real time.
         </p>
       </div>
@@ -489,6 +489,26 @@
       <!-- Master Interactive Score Frame -->
       <div class="bg-white p-4 sm:p-8 rounded-sm passepartout border border-stoneBorder shadow-sm">
         
+        <!-- Piece Switcher Tabs: Palestrina Motet vs Pachelbel Canon -->
+        <div class="flex items-center justify-center p-1 bg-parchment/80 rounded-full border border-stoneBorder max-w-lg mx-auto mb-8 shadow-2xs">
+          <button 
+            id="tabPiecePalestrina"
+            onclick="switchComposition('palestrina')"
+            class="flex-1 py-1.5 px-3 sm:px-4 rounded-full font-serif text-xs sm:text-sm tracking-wide transition-all duration-200 font-medium cursor-pointer shadow-xs bg-white text-charcoal flex items-center justify-center space-x-1.5"
+          >
+            <span>🏛️</span>
+            <span>Palestrina &bull; Sicut Cervus</span>
+          </button>
+          <button 
+            id="tabPiecePachelbel"
+            onclick="switchComposition('pachelbel')"
+            class="flex-1 py-1.5 px-3 sm:px-4 rounded-full font-serif text-xs sm:text-sm tracking-wide transition-all duration-200 font-medium cursor-pointer text-mutedInk hover:text-charcoal flex items-center justify-center space-x-1.5"
+          >
+            <span>🎻</span>
+            <span>Pachelbel &bull; Canon in D</span>
+          </button>
+        </div>
+
         <!-- Score Header / Master Transport Controls -->
         <div class="flex flex-col lg:flex-row lg:items-center justify-between pb-6 mb-6 border-b border-stoneBorder/70 gap-4">
           <div class="flex flex-wrap items-center gap-3">
@@ -525,7 +545,7 @@
               id="reverbToggleBtn" 
               onclick="toggleCathedralReverb()"
               class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded border border-romanGold/60 bg-parchment text-charcoal hover:bg-white transition-colors cursor-pointer"
-              title="Toggle St. Peter's Basilica vaulted stone reverberation"
+              title="Toggle Cathedral & Hall reverberation"
             >
               <i data-lucide="volume-2" class="w-3.5 h-3.5 text-romanGold"></i>
               <span id="reverbStatusLabel">Basilica Reverb: Active</span>
@@ -547,7 +567,7 @@
               <i data-lucide="info" class="w-3.5 h-3.5 text-romanGold shrink-0"></i>
               <span>Click any voice row to <strong>Solo</strong> or <strong>Mute</strong> &bull; Click anywhere on the staves to seek</span>
             </span>
-            <span class="text-terracotta uppercase tracking-wider font-semibold">Motet a 4 Voci &bull; Hypoionian Mode</span>
+            <span id="scoreModeBadge" class="text-terracotta uppercase tracking-wider font-semibold">Motet a 4 Voci &bull; Hypoionian Mode</span>
           </div>
 
           <!-- Rolling Scoreboard Container -->
@@ -577,7 +597,7 @@
 
         <!-- Sacred Text & Liturgical Commentary Plaque -->
         <div class="mt-8 pt-6 border-t border-stoneBorder/60 grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-          <div class="bg-parchment/60 p-5 rounded border border-stoneBorder flex flex-col justify-between">
+          <div id="polyphonyCardLeft" class="bg-parchment/60 p-5 rounded border border-stoneBorder flex flex-col justify-between">
             <div>
               <div class="flex items-center space-x-2 text-romanGold font-display text-[11px] uppercase tracking-widest font-semibold mb-2">
                 <i data-lucide="scroll" class="w-3.5 h-3.5"></i>
@@ -596,7 +616,7 @@
             </div>
           </div>
 
-          <div class="bg-parchment/60 p-5 rounded border border-stoneBorder flex flex-col justify-between">
+          <div id="polyphonyCardRight" class="bg-parchment/60 p-5 rounded border border-stoneBorder flex flex-col justify-between">
             <div>
               <div class="flex items-center space-x-2 text-terracotta font-display text-[11px] uppercase tracking-widest font-semibold mb-2">
                 <i data-lucide="landmark" class="w-3.5 h-3.5"></i>
@@ -1361,9 +1381,12 @@
     }
 
     /* ========================================================
-       2. PALESTRINA POLYPHONY ENGINE & SCORE VISUALIZER
-          Piece: Sicut Cervus (Giovanni Pierluigi da Palestrina)
-          Setting: Cappella del Coro, St. Peter's Basilica
+       2. SACRED POLYPHONY & BAROQUE CANON SYNTHESIZER & SCORE ENGINE
+          Compositions:
+          1. Sicut Cervus (Giovanni Pierluigi da Palestrina)
+             Setting: Cappella del Coro, St. Peter's Basilica
+          2. Canon in D (Johann Pachelbel)
+             Setting: Baroque Strings & Basso Continuo Processional
        ======================================================== */
     let audioCtx = null;
     let isAmbientPlaying = false;
@@ -1374,16 +1397,15 @@
     let palestrinaStartPerfTime = 0;
     let palestrinaStartAudioTime = 0;
     let palestrinaLastScheduledBeat = -0.1;
-    const BEAT_DURATION = 0.85; // Seconds per beat (~70 bpm, alla breve)
-    const TOTAL_BEATS = 70;
     const BEAT_PIXEL_WIDTH = 26; // Pixels per beat on the horizontal stave
+    let currentPieceId = 'palestrina';
 
     const NOTE_FREQUENCIES = {
-      'F2': 87.31, 'G2': 98.00, 'A2': 110.00, 'Bb2': 116.54, 'B2': 123.47,
-      'C3': 130.81, 'D3': 146.83, 'E3': 164.81, 'F3': 174.61, 'G3': 196.00,
-      'A3': 220.00, 'Bb3': 233.08, 'B3': 246.94, 'C4': 261.63, 'D4': 293.66,
-      'E4': 329.63, 'F4': 349.23, 'G4': 392.00, 'A4': 440.00, 'Bb4': 466.16,
-      'C5': 523.25
+      'D2': 73.42, 'E2': 82.41, 'F2': 87.31, 'F#2': 92.50, 'G2': 98.00, 'A2': 110.00, 'Bb2': 116.54, 'B2': 123.47,
+      'C3': 130.81, 'C#3': 138.59, 'D3': 146.83, 'E3': 164.81, 'F3': 174.61, 'F#3': 185.00, 'G3': 196.00,
+      'A3': 220.00, 'Bb3': 233.08, 'B3': 246.94, 'C4': 261.63, 'C#4': 277.18, 'D4': 293.66,
+      'E4': 329.63, 'F4': 349.23, 'F#4': 369.99, 'G4': 392.00, 'A4': 440.00, 'Bb4': 466.16, 'B4': 493.88,
+      'C5': 523.25, 'C#5': 554.37, 'D5': 587.33, 'E5': 659.25, 'F#5': 739.99, 'G5': 783.99, 'A5': 880.00
     };
 
     const PALESTRINA_VOICES = [
@@ -1523,144 +1545,434 @@
       }
     ];
 
+    /* Procedural Pachelbel Canon Voice Generator (Canon at the Unison at 2-Bar Distance) */
+    const PACHELBEL_VOICES = (() => {
+      const bassPattern = [
+        { note: 'D3', dur: 2 }, { note: 'A2', dur: 2 },
+        { note: 'B2', dur: 2 }, { note: 'F#2', dur: 2 },
+        { note: 'G2', dur: 2 }, { note: 'D3', dur: 2 },
+        { note: 'G2', dur: 2 }, { note: 'A2', dur: 2 }
+      ];
+
+      const bassoNotes = [];
+      for (let rep = 0; rep < 8; rep++) {
+        bassPattern.forEach((item, idx) => {
+          bassoNotes.push({ beat: rep * 8 + idx * 2, dur: item.dur, note: item.note, lyric: item.note });
+        });
+      }
+      bassoNotes.push({ beat: 64, dur: 4, note: 'D3', lyric: 'D3' });
+
+      const violin1Notes = [
+        // 1. Stately Theme (bars 3 - 6, beats 8 - 23)
+        { beat: 8, dur: 2, note: 'F#5', lyric: 'F#5' },
+        { beat: 10, dur: 2, note: 'E5', lyric: 'E5' },
+        { beat: 12, dur: 2, note: 'D5', lyric: 'D5' },
+        { beat: 14, dur: 2, note: 'C#5', lyric: 'C#5' },
+        { beat: 16, dur: 2, note: 'B4', lyric: 'B4' },
+        { beat: 18, dur: 2, note: 'A4', lyric: 'A4' },
+        { beat: 20, dur: 2, note: 'B4', lyric: 'B4' },
+        { beat: 22, dur: 2, note: 'C#5', lyric: 'C#5' },
+
+        // 2. Scalic 8th Notes (bars 7 - 10, beats 24 - 39)
+        { beat: 24, dur: 0.5, note: 'D5', lyric: 'D5' },
+        { beat: 24.5, dur: 0.5, note: 'C#5', lyric: '' },
+        { beat: 25, dur: 0.5, note: 'D5', lyric: '' },
+        { beat: 25.5, dur: 0.5, note: 'F#5', lyric: '' },
+        { beat: 26, dur: 0.5, note: 'E5', lyric: 'E5' },
+        { beat: 26.5, dur: 0.5, note: 'D5', lyric: '' },
+        { beat: 27, dur: 0.5, note: 'E5', lyric: '' },
+        { beat: 27.5, dur: 0.5, note: 'C#5', lyric: '' },
+
+        { beat: 28, dur: 0.5, note: 'D5', lyric: 'D5' },
+        { beat: 28.5, dur: 0.5, note: 'C#5', lyric: '' },
+        { beat: 29, dur: 0.5, note: 'B4', lyric: '' },
+        { beat: 29.5, dur: 0.5, note: 'D5', lyric: '' },
+        { beat: 30, dur: 0.5, note: 'A4', lyric: 'A4' },
+        { beat: 30.5, dur: 0.5, note: 'G4', lyric: '' },
+        { beat: 31, dur: 0.5, note: 'A4', lyric: '' },
+        { beat: 31.5, dur: 0.5, note: 'F#4', lyric: '' },
+
+        { beat: 32, dur: 0.5, note: 'G4', lyric: 'G4' },
+        { beat: 32.5, dur: 0.5, note: 'F#4', lyric: '' },
+        { beat: 33, dur: 0.5, note: 'E4', lyric: '' },
+        { beat: 33.5, dur: 0.5, note: 'G4', lyric: '' },
+        { beat: 34, dur: 0.5, note: 'F#4', lyric: 'F#4' },
+        { beat: 34.5, dur: 0.5, note: 'E4', lyric: '' },
+        { beat: 35, dur: 0.5, note: 'D4', lyric: '' },
+        { beat: 35.5, dur: 0.5, note: 'F#4', lyric: '' },
+
+        { beat: 36, dur: 0.5, note: 'G4', lyric: 'G4' },
+        { beat: 36.5, dur: 0.5, note: 'A4', lyric: '' },
+        { beat: 37, dur: 0.5, note: 'B4', lyric: '' },
+        { beat: 37.5, dur: 0.5, note: 'G4', lyric: '' },
+        { beat: 38, dur: 0.5, note: 'A4', lyric: 'A4' },
+        { beat: 38.5, dur: 0.5, note: 'G4', lyric: '' },
+        { beat: 39, dur: 0.5, note: 'F#4', lyric: '' },
+        { beat: 39.5, dur: 0.5, note: 'E4', lyric: '' },
+
+        // 3. Arpeggiated Leaps (bars 11 - 14, beats 40 - 55)
+        { beat: 40, dur: 1, note: 'F#4', lyric: 'F#4' },
+        { beat: 41, dur: 1, note: 'D4', lyric: '' },
+        { beat: 42, dur: 1, note: 'A4', lyric: 'A4' },
+        { beat: 43, dur: 1, note: 'F#4', lyric: '' },
+        { beat: 44, dur: 1, note: 'D4', lyric: 'D4' },
+        { beat: 45, dur: 1, note: 'B3', lyric: '' },
+        { beat: 46, dur: 1, note: 'D4', lyric: '' },
+        { beat: 47, dur: 1, note: 'C#4', lyric: 'C#4' },
+
+        { beat: 48, dur: 1, note: 'B3', lyric: 'B3' },
+        { beat: 49, dur: 1, note: 'G3', lyric: '' },
+        { beat: 50, dur: 1, note: 'F#3', lyric: 'F#3' },
+        { beat: 51, dur: 1, note: 'A3', lyric: '' },
+        { beat: 52, dur: 1, note: 'B3', lyric: 'B3' },
+        { beat: 53, dur: 1, note: 'D4', lyric: '' },
+        { beat: 54, dur: 2, note: 'C#4', lyric: 'C#4' },
+
+        // 4. Cadence & Resolution (bars 15 - 17, beats 56 - 67)
+        { beat: 56, dur: 2, note: 'D4', lyric: 'D4' },
+        { beat: 58, dur: 2, note: 'F#4', lyric: 'F#4' },
+        { beat: 60, dur: 2, note: 'E4', lyric: 'E4' },
+        { beat: 62, dur: 2, note: 'C#4', lyric: 'C#4' },
+        { beat: 64, dur: 4, note: 'D4', lyric: 'D4' }
+      ];
+
+      const violin2Notes = [];
+      violin1Notes.forEach(n => {
+        const shiftedBeat = n.beat + 8;
+        if (shiftedBeat < 64) {
+          violin2Notes.push({ beat: shiftedBeat, dur: Math.min(n.dur, 64 - shiftedBeat), note: n.note, lyric: n.lyric });
+        }
+      });
+      violin2Notes.push({ beat: 64, dur: 4, note: 'F#4', lyric: 'F#4' });
+
+      const violin3Notes = [];
+      violin1Notes.forEach(n => {
+        const shiftedBeat = n.beat + 16;
+        if (shiftedBeat < 64) {
+          violin3Notes.push({ beat: shiftedBeat, dur: Math.min(n.dur, 64 - shiftedBeat), note: n.note, lyric: n.lyric });
+        }
+      });
+      violin3Notes.push({ beat: 64, dur: 4, note: 'A4', lyric: 'A4' });
+
+      return [
+        {
+          id: "violin1",
+          name: "Violin I",
+          range: "First Violin &bull; G2 Clef",
+          clef: "G2",
+          color: "#C5A059", // Roman Antique Gold
+          pan: -0.32,
+          minPitch: "F#3",
+          maxPitch: "F#5",
+          notes: violin1Notes
+        },
+        {
+          id: "violin2",
+          name: "Violin II",
+          range: "Second Violin &bull; Canon at 2 Bars",
+          clef: "G2",
+          color: "#B65D43", // Roman Terracotta
+          pan: -0.10,
+          minPitch: "F#3",
+          maxPitch: "F#5",
+          notes: violin2Notes
+        },
+        {
+          id: "violin3",
+          name: "Violin III",
+          range: "Third Violin &bull; Canon at 4 Bars",
+          clef: "G2",
+          color: "#2C3E50", // Twilight Slate
+          pan: 0.12,
+          minPitch: "F#3",
+          maxPitch: "F#5",
+          notes: violin3Notes
+        },
+        {
+          id: "basso",
+          name: "Basso Continuo",
+          range: "Cello &bull; 8-Chord Ground Bass",
+          clef: "F4",
+          color: "#191614", // Charcoal Walnut
+          pan: 0.32,
+          minPitch: "F#2",
+          maxPitch: "D3",
+          notes: bassoNotes
+        }
+      ];
+    })();
+
+    const COMPOSITIONS = {
+      palestrina: {
+        id: 'palestrina',
+        title: "Palestrina in the Chapel of the Choir",
+        overheading: "Polyphonia Sacra &bull; Cappella Giulia",
+        subtitle: "Giovanni Pierluigi da Palestrina (c. 1525&ndash;1594) composed in this very chapel as Master of the Vatican Choir. During our marriage service, his motet <em>Sicut Cervus</em> (Psalm 42) resonated through Maderno&rsquo;s choir stalls. Explore each voice below as the Renaissance score unfolds in real time.",
+        modeLabel: "Motet a 4 Voci &bull; Hypoionian Mode",
+        playLabel: "Play Sicut Cervus",
+        navLabel: "Palestrina",
+        beatDuration: 0.85,
+        totalBeats: 70,
+        totalDurationStr: "0:59",
+        timbre: "choral",
+        voices: PALESTRINA_VOICES,
+        textureBadgeFn: (curBeat, curMeasure) => {
+          if (curBeat < 12) return `M.${curMeasure} &bull; <strong>Cantus Solo</strong> (The Deer Thirsts)`;
+          if (curBeat < 24) return `M.${curMeasure} &bull; <strong>Altus Enters</strong> (Imitation at the 5th)`;
+          if (curBeat < 36) return `M.${curMeasure} &bull; <strong>Tenor Joins</strong> (3-Part Polyphony)`;
+          return `M.${curMeasure} &bull; <strong>Bassus Enters</strong> (Full 4-Voice Choir)`;
+        },
+        cards: {
+          left: {
+            icon: "scroll",
+            tag: "Sacred Psalm Text &bull; Psalm 42:1–2",
+            quote: "&ldquo;Sicut cervus desiderat ad fontes aquarum, ita desiderat anima mea ad te, Deus.&rdquo;",
+            body: "&ldquo;As the deer longs for running streams, so longs my soul for you, O God.&rdquo;",
+            footerLeft: "Latin Vulgate &bull; Roman Gradual",
+            footerRight: "Offertorium Pro Sponsis"
+          },
+          right: {
+            icon: "landmark",
+            tag: "Architectural &amp; Choral Provenance",
+            quote: "Giovanni Pierluigi da Palestrina served as Master of the <strong>Cappella Giulia</strong> choir at St. Peter&rsquo;s Basilica. He composed and directed his vocal polyphony in the Chapel of the Choir where our marriage was consecrated.",
+            body: "Each voice enters in sacred imitation: first the <strong>Cantus</strong>, followed four measures later by the <strong>Altus</strong> a fifth lower, then the <strong>Tenor</strong>, and finally anchored by the deep <strong>Bassus</strong>.",
+            footerLeft: "Cappella del Coro Walnut Stalls",
+            footerRight: "Twin 17th-Century Organs"
+          }
+        }
+      },
+      pachelbel: {
+        id: 'pachelbel',
+        title: "Pachelbel's Canon in D Major",
+        overheading: "Baroque Processional &bull; 3 Violins &amp; Continuo",
+        subtitle: "Johann Pachelbel (1653&ndash;1706) composed his celebrated Canon and Gigue in D major for three violins and basso continuo. Built on an unyielding eight-note ground bass and strict three-voice canon at the unison, it has become the world&rsquo;s most beloved wedding processional. Explore each violin entry and variation as the baroque counterpoint blooms.",
+        modeLabel: "Canon a 3 Violini e Basso Continuo &bull; D Major",
+        playLabel: "Play Canon in D",
+        navLabel: "Canon in D",
+        beatDuration: 0.70,
+        totalBeats: 68,
+        totalDurationStr: "0:48",
+        timbre: "strings",
+        voices: PACHELBEL_VOICES,
+        textureBadgeFn: (curBeat, curMeasure) => {
+          if (curBeat < 8) return `M.${curMeasure} &bull; <strong>Basso Continuo Solo</strong> (Ground Bass Ostinato)`;
+          if (curBeat < 16) return `M.${curMeasure} &bull; <strong>Violin I Enters</strong> (The Iconic Theme)`;
+          if (curBeat < 24) return `M.${curMeasure} &bull; <strong>Violin II Joins</strong> (Canon at the Unison)`;
+          if (curBeat < 40) return `M.${curMeasure} &bull; <strong>Violin III Joins</strong> (Full 4-Part Baroque Strings)`;
+          if (curBeat < 56) return `M.${curMeasure} &bull; <strong>Flowing Variations</strong> (Scalic &amp; Arpeggio Figures)`;
+          return `M.${curMeasure} &bull; <strong>Grand Cadence</strong> (Full Ensemble Resolution in D)`;
+        },
+        cards: {
+          left: {
+            icon: "music-2",
+            tag: "The Romanesca Ground Bass &bull; Eight Chords",
+            quote: "D &ndash; A &ndash; Bm &ndash; F#m &ndash; G &ndash; D &ndash; G &ndash; A",
+            body: "The universal anthem of joyous wedding processionals. Over an unbending ground bass repeating every two measures (I &ndash; V &ndash; vi &ndash; iii &ndash; IV &ndash; I &ndash; IV &ndash; V), Pachelbel weaves cascading variations of increasing rhythmic vitality and grace.",
+            footerLeft: "Baroque Basso Ostinato",
+            footerRight: "D Major &bull; Andante Maestoso"
+          },
+          right: {
+            icon: "sparkles",
+            tag: "Strict Canon at the Unison",
+            quote: "The three upper violin voices play the exact same musical line in strict unison canon, each delayed by precisely two measures (8 beats).",
+            body: "As Violin I accelerates from stately quarter notes into flowing eighth-note scales and arpeggiated figures, Violins II and III repeat the identical counterpoint in interlocking polyphonic layers over the steady cello foundation.",
+            footerLeft: "Mus.MS 16481/8 Manuscript",
+            footerRight: "3 Violini con Basso Continuo"
+          }
+        }
+      }
+    };
+
+    function getActivePiece() {
+      return COMPOSITIONS[currentPieceId] || COMPOSITIONS.palestrina;
+    }
+
     // Audio node routing references
     let masterGainNode = null;
     let dryGainNode = null;
     let reverbGainNode = null;
     let convolverNode = null;
     const voiceAudioNodes = {};
-    const voiceMixerState = {
-      cantus: { muted: false, solo: false },
-      altus: { muted: false, solo: false },
-      tenor: { muted: false, solo: false },
-      bassus: { muted: false, solo: false }
-    };
+    const voiceMixerState = {};
 
     function initAudio() {
       if (!audioCtx) {
         const AudioContextClass = window.AudioContext || window.webkitAudioContext;
         audioCtx = new AudioContextClass();
-        setupPalestrinaAudioGraph();
+
+        masterGainNode = audioCtx.createGain();
+        masterGainNode.gain.value = 0.52;
+
+        dryGainNode = audioCtx.createGain();
+        dryGainNode.gain.value = 0.65;
+
+        reverbGainNode = audioCtx.createGain();
+        reverbGainNode.gain.value = 0.45;
+
+        convolverNode = audioCtx.createConvolver();
+        buildBasilicaImpulseResponse(convolverNode, audioCtx, 2.8, 2.0);
+
+        dryGainNode.connect(masterGainNode);
+        reverbGainNode.connect(convolverNode);
+        convolverNode.connect(masterGainNode);
+        masterGainNode.connect(audioCtx.destination);
       }
+      ensureVoiceChannels();
     }
 
-    function setupPalestrinaAudioGraph() {
+    function ensureVoiceChannels() {
       if (!audioCtx) return;
-
-      // Master output gain
-      masterGainNode = audioCtx.createGain();
-      masterGainNode.gain.setValueAtTime(0.001, audioCtx.currentTime);
-      masterGainNode.gain.exponentialRampToValueAtTime(0.85, audioCtx.currentTime + 1.2);
-      masterGainNode.connect(audioCtx.destination);
-
-      // Dry / Reverb split
-      dryGainNode = audioCtx.createGain();
-      dryGainNode.gain.setValueAtTime(0.70, audioCtx.currentTime);
-      dryGainNode.connect(masterGainNode);
-
-      // Synthetic 2.8s Cathedral Convolver (St. Peter's vaulted stone acoustics)
-      convolverNode = audioCtx.createConvolver();
-      convolverNode.buffer = createCathedralImpulseBuffer(audioCtx, 2.8, 2.2);
-
-      reverbGainNode = audioCtx.createGain();
-      reverbGainNode.gain.setValueAtTime(isReverbEnabled ? 0.45 : 0.001, audioCtx.currentTime);
-      convolverNode.connect(reverbGainNode);
-      reverbGainNode.connect(masterGainNode);
-
-      // Create channels for each voice
-      PALESTRINA_VOICES.forEach(voice => {
-        const voiceGain = audioCtx.createGain();
-        voiceGain.gain.setValueAtTime(1.0, audioCtx.currentTime);
-
-        const filter = audioCtx.createBiquadFilter();
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(1400, audioCtx.currentTime);
-        filter.Q.setValueAtTime(0.8, audioCtx.currentTime);
-
-        let panner = null;
-        if (audioCtx.createStereoPanner) {
-          panner = audioCtx.createStereoPanner();
-          panner.pan.setValueAtTime(voice.pan, audioCtx.currentTime);
-          voiceGain.connect(filter);
-          filter.connect(panner);
-          panner.connect(dryGainNode);
-          panner.connect(convolverNode);
-        } else {
-          voiceGain.connect(filter);
-          filter.connect(dryGainNode);
-          filter.connect(convolverNode);
+      const allVoices = [...PALESTRINA_VOICES, ...PACHELBEL_VOICES];
+      allVoices.forEach(voice => {
+        if (!voiceAudioNodes[voice.id]) {
+          const vGain = audioCtx.createGain();
+          const vPan = audioCtx.createStereoPanner();
+          vGain.gain.value = 1.0;
+          vPan.pan.value = voice.pan;
+          vGain.connect(vPan);
+          vPan.connect(dryGainNode);
+          vPan.connect(reverbGainNode);
+          voiceAudioNodes[voice.id] = { gain: vGain, pan: vPan };
         }
-
-        voiceAudioNodes[voice.id] = {
-          gain: voiceGain,
-          filter: filter,
-          panner: panner
-        };
+        if (!voiceMixerState[voice.id]) {
+          voiceMixerState[voice.id] = { muted: false, solo: false };
+        }
       });
     }
 
-    function createCathedralImpulseBuffer(ctx, duration = 2.8, decay = 2.2) {
-      const rate = ctx.sampleRate;
-      const length = Math.floor(rate * duration);
-      const impulse = ctx.createBuffer(2, length, rate);
+    /* Synthetic Convolution Reverb: Simulates the 2.8s acoustic decay of St. Peter's Chapel */
+    function buildBasilicaImpulseResponse(convolver, ctx, duration, decay) {
+      const sampleRate = ctx.sampleRate;
+      const length = sampleRate * duration;
+      const impulse = ctx.createBuffer(2, length, sampleRate);
       const left = impulse.getChannelData(0);
       const right = impulse.getChannelData(1);
 
       for (let i = 0; i < length; i++) {
-        const progress = i / length;
-        const envelope = Math.pow(1 - progress, decay);
-        left[i] = (Math.random() * 2 - 1) * envelope;
-        right[i] = (Math.random() * 2 - 1) * envelope;
+        const t = i / length;
+        const env = Math.pow(1 - t, decay) + 0.15 * Math.pow(1 - t, decay * 3.5);
+        left[i] = (Math.random() * 2 - 1) * env;
+        right[i] = (Math.random() * 2 - 1) * env;
       }
-      return impulse;
+      convolver.buffer = impulse;
     }
 
-    /* Note Synthesizer: Smooth Renaissance Vocal & Flue Organ harmonics */
-    function playSyntheticChoralTone(freq, startTime, duration, voiceId) {
+    /* Choral Voice Synthesizer: Flue Organ Pipes & Renaissance Vocal Harmonics */
+    function playSyntheticChoralTone(freq, startTime, durationSec, voiceId) {
       if (!audioCtx || !voiceAudioNodes[voiceId]) return;
-      const targetGainNode = voiceAudioNodes[voiceId].gain;
 
-      // Note envelope
-      const noteGain = audioCtx.createGain();
-      const safeStart = Math.max(audioCtx.currentTime, startTime);
-      const attackTime = 0.14;
-      const releaseTime = 0.22;
-      const sustainLevel = 0.075;
-
-      noteGain.gain.setValueAtTime(0.0001, safeStart);
-      noteGain.gain.linearRampToValueAtTime(sustainLevel, safeStart + attackTime);
-      noteGain.gain.setValueAtTime(sustainLevel, Math.max(safeStart + attackTime, safeStart + duration - releaseTime));
-      noteGain.gain.exponentialRampToValueAtTime(0.0001, safeStart + duration);
-
-      // Primary oscillator: Pure fundamental sine wave
+      const voiceChannel = voiceAudioNodes[voiceId];
       const osc1 = audioCtx.createOscillator();
-      osc1.type = 'sine';
-      osc1.frequency.setValueAtTime(freq, safeStart);
-
-      // Secondary oscillator: Soft triangle harmonic for organ pipe warmth
       const osc2 = audioCtx.createOscillator();
-      osc2.type = 'triangle';
-      osc2.frequency.setValueAtTime(freq, safeStart);
       const osc2Gain = audioCtx.createGain();
-      osc2Gain.gain.setValueAtTime(0.22, safeStart);
+      const noteGain = audioCtx.createGain();
+      const noteFilter = audioCtx.createBiquadFilter();
 
-      osc1.connect(noteGain);
+      osc1.type = 'sine';
+      osc2.type = 'triangle';
+
+      osc1.frequency.setValueAtTime(freq, startTime);
+      osc2.frequency.setValueAtTime(freq * 2.0, startTime);
+
+      noteFilter.type = 'lowpass';
+      noteFilter.frequency.setValueAtTime(1400, startTime);
+      noteFilter.Q.setValueAtTime(1.8, startTime);
+
+      const attackTime = 0.08;
+      const releaseTime = 0.22;
+      const peakGain = 0.22;
+
+      noteGain.gain.setValueAtTime(0.0001, startTime);
+      noteGain.gain.linearRampToValueAtTime(peakGain, startTime + attackTime);
+      noteGain.gain.setValueAtTime(peakGain * 0.90, startTime + durationSec * 0.8);
+
+      const stopTime = startTime + durationSec;
+      noteGain.gain.setValueAtTime(peakGain * 0.88, stopTime);
+      noteGain.gain.exponentialRampToValueAtTime(0.0001, stopTime + releaseTime);
+
+      osc2Gain.gain.value = 0.22;
+
+      osc1.connect(noteFilter);
       osc2.connect(osc2Gain);
-      osc2Gain.connect(noteGain);
-      noteGain.connect(targetGainNode);
+      osc2Gain.connect(noteFilter);
+      noteFilter.connect(noteGain);
+      noteGain.connect(voiceChannel.gain);
 
-      osc1.start(safeStart);
-      osc2.start(safeStart);
-
-      const stopTime = safeStart + duration + 0.1;
-      osc1.stop(stopTime);
-      osc2.stop(stopTime);
+      osc1.start(startTime);
+      osc2.start(startTime);
+      osc1.stop(stopTime + releaseTime);
+      osc2.stop(stopTime + releaseTime);
 
       setTimeout(() => {
         try {
           osc1.disconnect();
           osc2.disconnect();
           osc2Gain.disconnect();
+          noteFilter.disconnect();
+          noteGain.disconnect();
+        } catch(e) {}
+      }, (stopTime - audioCtx.currentTime + 0.5) * 1000);
+    }
+
+    /* Baroque String Synthesizer: Bowed Violins & Cello Continuo */
+    function playSyntheticStringTone(freq, startTime, durationSec, voiceId) {
+      if (!audioCtx || !voiceAudioNodes[voiceId]) return;
+
+      const isBass = (voiceId === 'basso');
+      const voiceChannel = voiceAudioNodes[voiceId];
+
+      const osc1 = audioCtx.createOscillator();
+      const osc2 = audioCtx.createOscillator();
+      const osc2Gain = audioCtx.createGain();
+      const noteGain = audioCtx.createGain();
+      const noteFilter = audioCtx.createBiquadFilter();
+
+      // String Timbre: Sawtooth for rich harmonic series + Triangle for warm wooden body
+      osc1.type = 'sawtooth';
+      osc2.type = 'triangle';
+
+      osc1.frequency.setValueAtTime(freq, startTime);
+      // Subtle natural string chorus/detune (+2.5 cents)
+      osc2.frequency.setValueAtTime(freq * 1.0015, startTime);
+
+      // Lowpass filter for warm acoustic resonance
+      noteFilter.type = 'lowpass';
+      noteFilter.frequency.setValueAtTime(isBass ? 1100 : 2500, startTime);
+      noteFilter.Q.setValueAtTime(isBass ? 1.4 : 1.1, startTime);
+
+      // Bowing envelope: soft bowed attack, resonant sustain, gentle release
+      const attackTime = isBass ? 0.05 : 0.035;
+      const releaseTime = isBass ? 0.08 : 0.065;
+      const peakGain = isBass ? 0.24 : 0.18;
+
+      noteGain.gain.setValueAtTime(0.0001, startTime);
+      noteGain.gain.linearRampToValueAtTime(peakGain, startTime + attackTime);
+      noteGain.gain.setValueAtTime(peakGain * 0.88, startTime + durationSec * 0.7);
+
+      const stopTime = startTime + durationSec;
+      noteGain.gain.setValueAtTime(peakGain * 0.85, stopTime);
+      noteGain.gain.exponentialRampToValueAtTime(0.0001, stopTime + releaseTime);
+
+      osc2Gain.gain.value = 0.45;
+
+      // Routing
+      osc1.connect(noteFilter);
+      osc2.connect(osc2Gain);
+      osc2Gain.connect(noteFilter);
+      noteFilter.connect(noteGain);
+      noteGain.connect(voiceChannel.gain);
+
+      osc1.start(startTime);
+      osc2.start(startTime);
+      osc1.stop(stopTime + releaseTime);
+      osc2.stop(stopTime + releaseTime);
+
+      setTimeout(() => {
+        try {
+          osc1.disconnect();
+          osc2.disconnect();
+          osc2Gain.disconnect();
+          noteFilter.disconnect();
           noteGain.disconnect();
         } catch(e) {}
       }, (stopTime - audioCtx.currentTime + 0.5) * 1000);
@@ -1670,58 +1982,69 @@
     function runPalestrinaScheduler() {
       if (!audioCtx || !isAmbientPlaying || audioCtx.state !== 'running') return;
 
+      const activePiece = getActivePiece();
+      const beatDur = activePiece.beatDuration;
+      const totalB = activePiece.totalBeats;
+
       const currentAudioTime = audioCtx.currentTime;
       // Synchronize audio clock with performance time
-      const expectedAudioStart = currentAudioTime - (palestrinaCurrentBeat * BEAT_DURATION);
+      const expectedAudioStart = currentAudioTime - (palestrinaCurrentBeat * beatDur);
       if (Math.abs(palestrinaStartAudioTime - expectedAudioStart) > 0.3) {
         palestrinaStartAudioTime = expectedAudioStart;
       }
 
       const scheduleAheadSec = 0.40;
-      const lookaheadBeats = scheduleAheadSec / BEAT_DURATION;
+      const lookaheadBeats = scheduleAheadSec / beatDur;
       const startScanBeat = palestrinaLastScheduledBeat;
       const endScanBeat = palestrinaCurrentBeat + lookaheadBeats;
 
-      PALESTRINA_VOICES.forEach(voice => {
+      activePiece.voices.forEach(voice => {
         // Skip voice if muted
-        if (voiceMixerState[voice.id].muted) return;
+        if (voiceMixerState[voice.id]?.muted) return;
 
         voice.notes.forEach(note => {
           let noteBeat = note.beat;
           // Handle loop boundary
-          if (noteBeat < startScanBeat && endScanBeat >= TOTAL_BEATS) {
-            noteBeat += TOTAL_BEATS;
+          if (noteBeat < startScanBeat && endScanBeat >= totalB) {
+            noteBeat += totalB;
           }
 
           if (noteBeat >= startScanBeat && noteBeat < endScanBeat) {
             const beatDiff = noteBeat - palestrinaCurrentBeat;
-            const noteStartAudio = currentAudioTime + (beatDiff * BEAT_DURATION);
+            const noteStartAudio = currentAudioTime + (beatDiff * beatDur);
             const freq = NOTE_FREQUENCIES[note.note] || 440;
-            const durSec = note.dur * BEAT_DURATION;
+            const durSec = note.dur * beatDur;
             if (noteStartAudio >= currentAudioTime - 0.05) {
-              playSyntheticChoralTone(freq, noteStartAudio, durSec, voice.id);
+              if (activePiece.timbre === 'strings') {
+                playSyntheticStringTone(freq, noteStartAudio, durSec, voice.id);
+              } else {
+                playSyntheticChoralTone(freq, noteStartAudio, durSec, voice.id);
+              }
             }
           }
         });
       });
 
-      palestrinaLastScheduledBeat = endScanBeat % TOTAL_BEATS;
+      palestrinaLastScheduledBeat = endScanBeat % totalB;
     }
 
     /* Master Playback Controls */
     function startPalestrina() {
       initAudio();
-      palestrinaStartPerfTime = performance.now() - (palestrinaCurrentBeat * BEAT_DURATION * 1000);
+      ensureVoiceChannels();
+      const activePiece = getActivePiece();
+      const beatDur = activePiece.beatDuration;
+      palestrinaStartPerfTime = performance.now() - (palestrinaCurrentBeat * beatDur * 1000);
 
       if (audioCtx) {
         if (audioCtx.state === 'suspended') {
           audioCtx.resume().then(() => {
             if (audioCtx) {
-              palestrinaStartAudioTime = audioCtx.currentTime - (palestrinaCurrentBeat * BEAT_DURATION);
+              palestrinaStartAudioTime = audioCtx.currentTime - (palestrinaCurrentBeat * beatDur);
             }
           }).catch(() => {});
         } else {
-          palestrinaStartAudioTime = audioCtx.currentTime - (palestrinaCurrentBeat * BEAT_DURATION);
+          palestrinaStartAudioTime = audioCtx.currentTime - (palestrinaCurrentBeat * beatDur);
         }
       }
 
@@ -1763,17 +2086,22 @@
       if (audioCtx) {
         palestrinaStartAudioTime = audioCtx.currentTime;
       }
+      const wrapper = document.getElementById('scoreScrollWrapper');
+      if (wrapper) wrapper.scrollLeft = 0;
       if (!isAmbientPlaying) {
         startPalestrina();
       }
     }
 
     function seekPalestrina(beat) {
-      palestrinaCurrentBeat = Math.max(0, Math.min(TOTAL_BEATS - 0.1, beat));
+      const activePiece = getActivePiece();
+      const beatDur = activePiece.beatDuration;
+      const totalB = activePiece.totalBeats;
+      palestrinaCurrentBeat = Math.max(0, Math.min(totalB - 0.1, beat));
       palestrinaLastScheduledBeat = palestrinaCurrentBeat - 0.05;
-      palestrinaStartPerfTime = performance.now() - (palestrinaCurrentBeat * BEAT_DURATION * 1000);
+      palestrinaStartPerfTime = performance.now() - (palestrinaCurrentBeat * beatDur * 1000);
       if (audioCtx) {
-        palestrinaStartAudioTime = audioCtx.currentTime - (palestrinaCurrentBeat * BEAT_DURATION);
+        palestrinaStartAudioTime = audioCtx.currentTime - (palestrinaCurrentBeat * beatDur);
       }
       if (!isAmbientPlaying) {
         startPalestrina();
@@ -1793,31 +2121,35 @@
 
     /* Voice Mixer: Solo & Mute */
     function toggleVoiceMute(voiceId) {
+      if (!voiceMixerState[voiceId]) voiceMixerState[voiceId] = { muted: false, solo: false };
       voiceMixerState[voiceId].muted = !voiceMixerState[voiceId].muted;
       updateVoiceMixerDOM();
     }
 
     function toggleVoiceSolo(voiceId) {
+      if (!voiceMixerState[voiceId]) voiceMixerState[voiceId] = { muted: false, solo: false };
       const isCurrentlySolo = voiceMixerState[voiceId].solo;
+      const activePiece = getActivePiece();
       if (isCurrentlySolo) {
-        // Clear all solos
-        Object.keys(voiceMixerState).forEach(k => {
-          voiceMixerState[k].solo = false;
-          voiceMixerState[k].muted = false;
+        activePiece.voices.forEach(v => {
+          if (!voiceMixerState[v.id]) voiceMixerState[v.id] = { muted: false, solo: false };
+          voiceMixerState[v.id].solo = false;
+          voiceMixerState[v.id].muted = false;
         });
       } else {
-        // Solo this voice, mute all others
-        Object.keys(voiceMixerState).forEach(k => {
-          voiceMixerState[k].solo = (k === voiceId);
-          voiceMixerState[k].muted = (k !== voiceId);
+        activePiece.voices.forEach(v => {
+          if (!voiceMixerState[v.id]) voiceMixerState[v.id] = { muted: false, solo: false };
+          voiceMixerState[v.id].solo = (v.id === voiceId);
+          voiceMixerState[v.id].muted = (v.id !== voiceId);
         });
       }
       updateVoiceMixerDOM();
     }
 
     function updateVoiceMixerDOM() {
-      PALESTRINA_VOICES.forEach(voice => {
-        const state = voiceMixerState[voice.id];
+      const activePiece = getActivePiece();
+      activePiece.voices.forEach(voice => {
+        const state = voiceMixerState[voice.id] || { muted: false, solo: false };
         const muteBtn = document.getElementById(`mute-btn-${voice.id}`);
         const soloBtn = document.getElementById(`solo-btn-${voice.id}`);
         const voiceRow = document.getElementById(`voice-row-${voice.id}`);
@@ -1846,7 +2178,6 @@
           voiceRow.style.opacity = state.muted ? "0.38" : "1.0";
         }
 
-        // Apply gain change smoothly
         if (voiceAudioNodes[voice.id] && audioCtx) {
           voiceAudioNodes[voice.id].gain.gain.setTargetAtTime(state.muted ? 0.0001 : 1.0, audioCtx.currentTime, 0.05);
         }
@@ -1855,6 +2186,7 @@
 
     /* UI State Syncer (Top Navigation + Section Controls) */
     function updatePalestrinaUIState(playing) {
+      const activePiece = getActivePiece();
       const topBtnText = document.getElementById('audioStatusText');
       const topEqualizer = document.getElementById('waveEqualizer');
       const playIcon = document.getElementById('polyphonyPlayIcon');
@@ -1862,30 +2194,148 @@
       const playBtn = document.getElementById('polyphonyPlayBtn');
 
       if (playing) {
-        if (topBtnText) topBtnText.textContent = "Palestrina (Playing)";
+        if (topBtnText) topBtnText.textContent = `${activePiece.navLabel} (Playing)`;
         if (topEqualizer) {
           topEqualizer.classList.remove('opacity-35');
           topEqualizer.classList.add('opacity-100');
         }
         if (playIcon) playIcon.setAttribute('data-lucide', 'pause');
-        if (playLabel) playLabel.textContent = "Pause Polyphony";
+        if (playLabel) playLabel.textContent = "Pause Music";
         if (playBtn) {
           playBtn.classList.remove('bg-charcoal');
           playBtn.classList.add('bg-terracotta');
         }
       } else {
-        if (topBtnText) topBtnText.textContent = "Palestrina (Play)";
+        if (topBtnText) topBtnText.textContent = `${activePiece.navLabel} (Play)`;
         if (topEqualizer) {
           topEqualizer.classList.remove('opacity-100');
           topEqualizer.classList.add('opacity-35');
         }
         if (playIcon) playIcon.setAttribute('data-lucide', 'play');
-        if (playLabel) playLabel.textContent = "Play Sicut Cervus";
+        if (playLabel) playLabel.textContent = activePiece.playLabel;
         if (playBtn) {
           playBtn.classList.remove('bg-terracotta');
           playBtn.classList.add('bg-charcoal');
         }
       }
+      lucide.createIcons();
+    }
+
+    /* Switch between Palestrina Motet and Pachelbel Canon */
+    function switchComposition(pieceId) {
+      if (currentPieceId === pieceId) return;
+      const wasPlaying = isAmbientPlaying;
+      if (wasPlaying) {
+        stopPalestrina();
+      }
+      currentPieceId = pieceId;
+      palestrinaCurrentBeat = 0;
+      palestrinaLastScheduledBeat = -0.1;
+      palestrinaStartPerfTime = performance.now();
+      if (audioCtx) {
+        palestrinaStartAudioTime = audioCtx.currentTime;
+        ensureVoiceChannels();
+      }
+
+      // Update tabs UI
+      const tabPal = document.getElementById('tabPiecePalestrina');
+      const tabPach = document.getElementById('tabPiecePachelbel');
+      if (tabPal && tabPach) {
+        if (pieceId === 'palestrina') {
+          tabPal.className = "flex-1 py-1.5 px-3 sm:px-4 rounded-full font-serif text-xs sm:text-sm tracking-wide transition-all duration-200 font-medium cursor-pointer shadow-xs bg-white text-charcoal flex items-center justify-center space-x-1.5";
+          tabPach.className = "flex-1 py-1.5 px-3 sm:px-4 rounded-full font-serif text-xs sm:text-sm tracking-wide transition-all duration-200 font-medium cursor-pointer text-mutedInk hover:text-charcoal flex items-center justify-center space-x-1.5";
+        } else {
+          tabPach.className = "flex-1 py-1.5 px-3 sm:px-4 rounded-full font-serif text-xs sm:text-sm tracking-wide transition-all duration-200 font-medium cursor-pointer shadow-xs bg-white text-charcoal flex items-center justify-center space-x-1.5";
+          tabPal.className = "flex-1 py-1.5 px-3 sm:px-4 rounded-full font-serif text-xs sm:text-sm tracking-wide transition-all duration-200 font-medium cursor-pointer text-mutedInk hover:text-charcoal flex items-center justify-center space-x-1.5";
+        }
+      }
+
+      updatePieceUI();
+      renderPalestrinaScore();
+
+      // Reset scroll
+      const wrapper = document.getElementById('scoreScrollWrapper');
+      if (wrapper) wrapper.scrollLeft = 0;
+
+      if (wasPlaying) {
+        startPalestrina();
+      }
+    }
+
+    function updatePieceUI() {
+      const activePiece = getActivePiece();
+      
+      const overheading = document.getElementById('scoreOverheading');
+      if (overheading) overheading.innerHTML = activePiece.overheading;
+
+      const mainHeading = document.getElementById('scoreMainHeading');
+      if (mainHeading) mainHeading.innerHTML = activePiece.title;
+
+      const subtitle = document.getElementById('scoreSubtitle');
+      if (subtitle) subtitle.innerHTML = activePiece.subtitle;
+
+      const modeBadge = document.getElementById('scoreModeBadge');
+      if (modeBadge) modeBadge.innerHTML = activePiece.modeLabel;
+
+      const totalTimeEl = document.getElementById('polyphonyTimeTotal');
+      if (totalTimeEl) totalTimeEl.textContent = activePiece.totalDurationStr;
+
+      const curTimeEl = document.getElementById('polyphonyTimeCurrent');
+      if (curTimeEl) curTimeEl.textContent = "0:00";
+
+      const textureBadge = document.getElementById('polyphonyTextureBadge');
+      if (textureBadge && activePiece.textureBadgeFn) {
+        textureBadge.innerHTML = activePiece.textureBadgeFn(0, 1);
+      }
+
+      // Plaque Cards
+      const leftCard = document.getElementById('polyphonyCardLeft');
+      if (leftCard && activePiece.cards?.left) {
+        const c = activePiece.cards.left;
+        leftCard.innerHTML = `
+          <div>
+            <div class="flex items-center space-x-2 text-romanGold font-display text-[11px] uppercase tracking-widest font-semibold mb-2">
+              <i data-lucide="${c.icon}" class="w-3.5 h-3.5"></i>
+              <span>${c.tag}</span>
+            </div>
+            <p class="font-serif italic text-base text-charcoal leading-relaxed mb-3">
+              ${c.quote}
+            </p>
+            <p class="font-sans text-mutedInk leading-relaxed">
+              ${c.body}
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-stoneBorder/60 text-[10px] font-mono text-mutedInk flex justify-between">
+            <span>${c.footerLeft}</span>
+            <span>${c.footerRight}</span>
+          </div>
+        `;
+      }
+
+      const rightCard = document.getElementById('polyphonyCardRight');
+      if (rightCard && activePiece.cards?.right) {
+        const c = activePiece.cards.right;
+        rightCard.innerHTML = `
+          <div>
+            <div class="flex items-center space-x-2 text-terracotta font-display text-[11px] uppercase tracking-widest font-semibold mb-2">
+              <i data-lucide="${c.icon}" class="w-3.5 h-3.5"></i>
+              <span>${c.tag}</span>
+            </div>
+            <p class="font-sans text-xs text-charcoal/90 leading-relaxed mb-3">
+              ${c.quote}
+            </p>
+            <p class="font-sans text-xs text-mutedInk leading-relaxed">
+              ${c.body}
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-stoneBorder/60 text-[10px] font-mono text-mutedInk flex justify-between">
+            <span>${c.footerLeft}</span>
+            <span>${c.footerRight}</span>
+          </div>
+        `;
+      }
+
+      updatePalestrinaUIState(isAmbientPlaying);
       lucide.createIcons();
     }
 
@@ -1905,13 +2355,15 @@
 
     /* Score Visualizer DOM Generator */
     function renderPalestrinaScore() {
+      const activePiece = getActivePiece();
+      const totalB = activePiece.totalBeats;
       const ruler = document.getElementById('scoreTimelineRuler');
       const container = document.getElementById('scoreStavesContainer');
       if (!ruler || !container) return;
 
-      // 1. Build Measure markers (18 measures, 4 beats each)
+      // 1. Build Measure markers
       let rulerHTML = '';
-      const totalMeasures = Math.ceil(TOTAL_BEATS / 4);
+      const totalMeasures = Math.ceil(totalB / 4);
       for (let m = 0; m < totalMeasures; m++) {
         const leftPx = m * 4 * BEAT_PIXEL_WIDTH;
         rulerHTML += `
@@ -1929,14 +2381,14 @@
         </div>
       `;
 
-      PALESTRINA_VOICES.forEach(voice => {
-        // Vertical pitch range offset
-        const pitchOrder = [
-          'F2','G2','A2','Bb2','B2',
-          'C3','D3','E3','F3','G3','A3','Bb3','B3',
-          'C4','D4','E4','F4','G4','A4','Bb4','B4',
-          'C5','D5'
-        ];
+      const pitchOrder = [
+        'D2','E2','F2','F#2','G2','A2','Bb2','B2',
+        'C3','C#3','D3','E3','F3','F#3','G3','A3','Bb3','B3',
+        'C4','C#4','D4','E4','F4','F#4','G4','A4','Bb4','B4',
+        'C5','C#5','D5','E5','F#5','G5','A5'
+      ];
+
+      activePiece.voices.forEach(voice => {
         const minIdx = pitchOrder.indexOf(voice.minPitch);
         const maxIdx = pitchOrder.indexOf(voice.maxPitch);
         const span = Math.max(1, maxIdx - minIdx);
@@ -1997,7 +2449,7 @@
                 const norm = Math.max(0, Math.min(1, (notePitchIdx - minIdx) / span));
                 const bottomY = Math.round(10 + norm * 42);
                 const leftX = n.beat * BEAT_PIXEL_WIDTH;
-                const widthPx = Math.max(22, (n.dur * BEAT_PIXEL_WIDTH) - 4);
+                const widthPx = Math.max(14, (n.dur * BEAT_PIXEL_WIDTH) - 2);
 
                 return `
                   <div 
@@ -2007,15 +2459,17 @@
                     data-beat="${n.beat}"
                     data-dur="${n.dur}"
                     style="left: ${leftX}px; width: ${widthPx}px; bottom: ${bottomY}px; height: 32px;"
-                    title="${voice.name}: ${n.note} (${n.dur} beats) &bull; ${n.lyric}"
+                    title="${voice.name}: ${n.note} (${n.dur} beats) ${n.lyric ? '&bull; ' + n.lyric : ''}"
                     onclick="event.stopPropagation(); seekPalestrina(${n.beat})"
                   >
                     <!-- Diamond / Lozenge notehead -->
-                    <div class="note-head w-3 h-3 rotate-45 border border-stoneBorder bg-white transition-all duration-150 shadow-xs"></div>
-                    <!-- Syllable underneath -->
-                    <span class="note-lyric text-[10px] font-serif italic tracking-wide text-charcoal/80 transition-all duration-150 mt-1 select-none whitespace-nowrap">
-                      ${n.lyric || '&bull;'}
-                    </span>
+                    <div class="note-head w-2.5 h-2.5 rotate-45 border border-stoneBorder bg-white transition-all duration-150 shadow-xs"></div>
+                    <!-- Syllable or note pitch underneath -->
+                    ${n.lyric ? `
+                      <span class="note-lyric text-[9px] font-serif italic tracking-wide text-charcoal/80 transition-all duration-150 mt-1 select-none whitespace-nowrap">
+                        ${n.lyric}
+                      </span>
+                    ` : ''}
                   </div>
                 `;
               }).join('')}
@@ -2027,6 +2481,7 @@
       });
 
       container.innerHTML = stavesHTML;
+      updateVoiceMixerDOM();
     }
 
     function handleStaveClick(event) {
@@ -2040,8 +2495,12 @@
     function renderPalestrinaVisualLoop() {
       if (!isAmbientPlaying) return;
 
+      const activePiece = getActivePiece();
+      const beatDur = activePiece.beatDuration;
+      const totalB = activePiece.totalBeats;
+
       const elapsedSec = (performance.now() - palestrinaStartPerfTime) / 1000;
-      const curBeat = (elapsedSec / BEAT_DURATION) % TOTAL_BEATS;
+      const curBeat = (elapsedSec / beatDur) % totalB;
       palestrinaCurrentBeat = curBeat;
 
       // 1. Move Playhead
@@ -2052,7 +2511,7 @@
       }
 
       // 2. Active Note Highlights & Syllables
-      PALESTRINA_VOICES.forEach(voice => {
+      activePiece.voices.forEach(voice => {
         voice.notes.forEach((note, idx) => {
           const el = document.getElementById(`note-${voice.id}-${idx}`);
           if (!el) return;
@@ -2067,23 +2526,15 @@
 
       // 3. Update Polyphonic Texture & Section Badge
       const textureBadge = document.getElementById('polyphonyTextureBadge');
-      if (textureBadge) {
+      if (textureBadge && activePiece.textureBadgeFn) {
         const curMeasure = Math.floor(curBeat / 4) + 1;
-        if (curBeat < 12) {
-          textureBadge.innerHTML = `M.${curMeasure} &bull; <strong>Cantus Solo</strong> (The Deer Thirsts)`;
-        } else if (curBeat < 24) {
-          textureBadge.innerHTML = `M.${curMeasure} &bull; <strong>Altus Enters</strong> (Imitation at the 5th)`;
-        } else if (curBeat < 36) {
-          textureBadge.innerHTML = `M.${curMeasure} &bull; <strong>Tenor Joins</strong> (3-Part Polyphony)`;
-        } else {
-          textureBadge.innerHTML = `M.${curMeasure} &bull; <strong>Bassus Enters</strong> (Full 4-Voice Choir)`;
-        }
+        textureBadge.innerHTML = activePiece.textureBadgeFn(curBeat, curMeasure);
       }
 
       // 4. Update Time Counter
       const curTimeEl = document.getElementById('polyphonyTimeCurrent');
       if (curTimeEl) {
-        const secTotal = Math.floor(curBeat * BEAT_DURATION);
+        const secTotal = Math.floor(curBeat * beatDur);
         const m = Math.floor(secTotal / 60);
         const s = secTotal % 60;
         curTimeEl.textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
