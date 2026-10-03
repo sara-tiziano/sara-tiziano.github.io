@@ -54,7 +54,7 @@ This document captures the essential context, design language, structural hierar
 
   - **Mechanism:** YouTube IFrame Player with **muted autoplay** (adheres to browser policies across Safari, Chrome, iOS, Android) paired with an intuitive one-tap unmute HUD and volume control.
 
-  - **Default / Custom Video ID:** Set to a placeholder (`L_LUpnjgPso`). Users can replace the URL directly through the embedded modal UI or by changing `currentVideoId` in `index.html`.
+  - **Default / Custom Video ID:** Set to the official wedding film (`_9AvzgLBtbw`). Users can also replace the URL directly through the embedded modal UI or by changing `currentVideoId` in `index.html`.
 
 - **Photography Archive:**
   - **Status:** In progress (analog 35mm film development and medium-format grading underway).
